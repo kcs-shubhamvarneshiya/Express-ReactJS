@@ -18,18 +18,15 @@ export default function PostComponent() {
 
     const result = await postService.createPost(formData);
 
-    if (result.data.success === true)
-    {
-        setMessage("Post created successfully")
-    } 
-    else{
-        setMessage("Error while creating post !!")
-
+    if (result.data.success === true) {
+      setMessage("Post created successfully");
+    } else {
+      setMessage("Error while creating post !!");
     }
 
-    setTimeout(()=>{
-        setMessage("")
-    },5000)
+    setTimeout(() => {
+      setMessage("");
+    }, 5000);
     event.target.reset();
   };
 
@@ -63,7 +60,9 @@ export default function PostComponent() {
         <button>Submit</button>
       </form>
 
-      <p>{message}</p>
+      <div className="alert alert-primary" role="alert">
+        <p>{message}</p>
+      </div>
     </div>
   );
 }

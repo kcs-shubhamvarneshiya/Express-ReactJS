@@ -33,4 +33,30 @@ const createPost = async(req,res)=>{
     }
 }
 
-module.exports = {createPost}
+const getPost = async(req,res)=>{
+    try{
+        const posts = await Post.find({});
+
+        if(posts.length<=0){
+            res.status(400).json({
+                success:false,
+                message : "Could not get post"
+            })
+        }
+        else{
+            res.status(200).json({
+                success:true,
+                data : posts,
+                message:"You have successfully get post"
+            })
+        }
+    }
+    catch(error){
+        res.status(400).json({
+            success : false,
+            message :"something went wrong while getting post"
+        })
+    }
+}
+
+module.exports = {createPost,getPost}

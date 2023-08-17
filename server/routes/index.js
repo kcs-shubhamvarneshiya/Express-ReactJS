@@ -34,4 +34,6 @@ const upload = multer({
 /* */
 app.post('/create-post',upload.single('image'),imageController.createPost)
 
+app.get('/get-post',imageController.getPost)
+
 module.exports = app;
