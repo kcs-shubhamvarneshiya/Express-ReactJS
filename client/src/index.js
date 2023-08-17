@@ -4,13 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import PostComponents from './components/PostComponent.jsx'
+import ShowPost from "./components/ShowPost.jsx"
 
 export default function Index() {
   return (
     <BrowserRouter basename="/">
       <Routes>
         <Route path="/" element={<App/>}/>
+        <Route path="/show" element={<ShowPost/>}/>
       </Routes>
     </BrowserRouter>
   );
