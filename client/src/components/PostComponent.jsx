@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import postService from "../services/postService";
 
 export default function PostComponent() {
+  
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
