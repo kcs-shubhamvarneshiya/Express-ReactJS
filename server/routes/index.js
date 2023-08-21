@@ -38,4 +38,6 @@ app.get('/get-post',imageController.getPost)
 
 app.get('/delete-post/:id',imageController.deletePost)
 
+app.get('/get-post/:id',imageController.getOnePost)
+
 module.exports = app;

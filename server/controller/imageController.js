@@ -1,5 +1,5 @@
 const Post = require("../Database/model/post");
-const {isMongooseIdValidation,errorHandler } = require("../Helper/handler");
+const { isMongooseIdValidation, errorHandler } = require("../Helper/handler");
 
 const createPost = async (req, res) => {
   try {
@@ -30,7 +30,7 @@ const createPost = async (req, res) => {
     });
   }
 };
-
+console.log("vh")
 const getPost = async (req, res) => {
   try {
     const posts = await Post.find({});
@@ -50,29 +50,30 @@ const getPost = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: "something went wrong while getting post",
+      message: error.message
     });
   }
 };
 
-const deletePost = async (req, res) => {
+const getOnePost = async (req, res) => {
   try {
-    var id = req.params.id;
-    console.log(id);
-    if (!isMongooseIdValidation(id, res)) return
-    const response = await Post.findOneAndDelete({_id: id});
-    if(response === null)
-    {
-        res.status(404).json({
-            success : false,
-            message : "something went wrong while deleting post"
-        })
+    const id = req.params.id;
+    
+    if (!isMongooseIdValidation(id, res)) return;
+
+    const result = await Post.findOne({ _id: id });
+    if (result === null) {
+      res.status(404).json({
+        success: false,
+        message: "post not found based on id",
+      });
     }
+
     res.status(200).json({
-        success:false,
-        message : "Post Deleted successfully"
-    })
-   
+      success: true,
+      message: "post fetched successfully",
+      data: result,
+    });
   } catch (error) {
     res.status(400).json({
       success: false,
@@ -81,4 +82,28 @@ const deletePost = async (req, res) => {
   }
 };
 
-module.exports = { createPost, getPost, deletePost };
+const deletePost = async (req, res) => {
+  try {
+    var id = req.params.id;
+    console.log(id);
+    if (!isMongooseIdValidation(id, res)) return;
+    const response = await Post.findOneAndDelete({ _id: id });
+    if (response === null) {
+      res.status(404).json({
+        success: false,
+        message: "something went wrong while deleting post",
+      });
+    }
+    res.status(200).json({
+      success: false,
+      message: "Post Deleted successfully",
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = { createPost, getPost, deletePost,getOnePost };
