@@ -36,4 +36,6 @@ app.post('/create-post',upload.single('image'),imageController.createPost)
 
 app.get('/get-post',imageController.getPost)
 
+app.get('/delete-post/:id',imageController.deletePost)
+
 module.exports = app;
