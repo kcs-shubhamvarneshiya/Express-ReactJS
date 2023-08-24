@@ -3,8 +3,10 @@ const app = express.Router();
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
-const imageController = require('../controller/imageController')
+const imageController = require('../controller/imageController');
+const userController = require('../controller/userController');
 
+app.use(express.json())
 app.use(express.static("public"));
 app.use(cors())
 
@@ -39,5 +41,10 @@ app.get('/get-post',imageController.getPost)
 app.get('/delete-post/:id',imageController.deletePost)
 
 app.get('/get-post/:id',imageController.getOnePost)
+
+app.post('/create-user',userController.createUser);
+
+app.post('/login',userController.login);
+
 
 module.exports = app;

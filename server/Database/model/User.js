@@ -20,6 +20,10 @@ const userSchema = mongoose.Schema({
     role :{
         type: 'string',
         required : true
+    },
+    token : {
+        type: 'string',
+        required : true
     }
 })
 

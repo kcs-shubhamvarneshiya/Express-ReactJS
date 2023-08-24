@@ -1,7 +1,9 @@
 const Post = require("../Database/model/post");
 const { isMongooseIdValidation, errorHandler } = require("../Helper/handler");
+const middleware = require("../middleware/auth")
 
 const createPost = async (req, res) => {
+  middleware(req,res)
   try {
     const post = new Post({
       title: req.body.title,
@@ -30,7 +32,7 @@ const createPost = async (req, res) => {
     });
   }
 };
-console.log("vh")
+
 const getPost = async (req, res) => {
   try {
     const posts = await Post.find({});
@@ -85,7 +87,6 @@ const getOnePost = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     var id = req.params.id;
-    console.log(id);
     if (!isMongooseIdValidation(id, res)) return;
     const response = await Post.findOneAndDelete({ _id: id });
     if (response === null) {
