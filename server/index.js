@@ -5,6 +5,7 @@ const indexRoute = require('./routes/index');
 const morgan = require('morgan');
 app.use(morgan('dev'))
 
+
 app.use('/api',indexRoute)
 
 app.listen(8000,()=>{

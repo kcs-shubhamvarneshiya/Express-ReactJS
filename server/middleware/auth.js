@@ -1,16 +1,21 @@
 const jwt = require('jsonwebtoken');
-const {errorHandler} = require('../Helper/handler');
+const {errorHandler,responseHandler} = require('../Helper/handler');
 const User = require('../Database/model/User');
-const connection = require('../Database/dbConnnection');
 
 const middleware = async(req,res,next)=>{
     try {
-        const token = await req.header.authorization.split(" ")[1];      
+        const token = req.headers.authorization.split(" ")[1];    
         const user = jwt.verify(token,process.env.JWT_SECRET)
-        console.log(user);
+        const data = await User.findOne({_id:user._id}).exec()
+   
+        if (data.token !== token){
+            return errorHandler(res, "You are not authorized user", 401)
+        } 
+        req.user = user;
+        next();
     } catch (error) {
-       return errorHandler(res,error.message,400);
+       throw new Error(error.message);
     }
 }
 
-module.exports = {middleware}
+module.exports = {middleware};

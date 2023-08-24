@@ -1,10 +1,17 @@
 const Post = require("../Database/model/post");
-const { isMongooseIdValidation, errorHandler } = require("../Helper/handler");
-const middleware = require("../middleware/auth")
+const {
+  isMongooseIdValidation,
+  errorHandler,
+  responseHandler,
+  isAdminValidation
+} = require("../Helper/handler");
+const auth = require('../middleware/auth');
 
 const createPost = async (req, res) => {
-  middleware(req,res)
   try {
+    auth.middleware(req,res)
+    if(!isAdminValidation(res)) return;
+
     const post = new Post({
       title: req.body.title,
       date: req.body.date,
@@ -14,22 +21,12 @@ const createPost = async (req, res) => {
     const result = await post.save();
 
     if (!result) {
-      res.status(400).json({
-        success: false,
-        message: "Could not save post !",
-      });
+      return errorHandler(res, "Could not save post !");
     } else {
-      res.status(200).json({
-        Data: result,
-        success: true,
-        message: "Post saved successfully",
-      });
+      return responseHandler(res, result, "Post saved successfully");
     }
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
+    return errorHandler(res, error.message);
   }
 };
 
@@ -38,49 +35,30 @@ const getPost = async (req, res) => {
     const posts = await Post.find({});
 
     if (posts.length <= 0) {
-      res.status(400).json({
-        success: false,
-        message: "Could not get post",
-      });
+      return errorHandler(res, "Could not get post");
     } else {
-      res.status(200).json({
-        success: true,
-        data: posts,
-        message: "You have successfully get post",
-      });
+      return responseHandler(res, "You have successfully get post");
     }
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message
-    });
+    return errorHandler(res, error.message);
   }
 };
 
 const getOnePost = async (req, res) => {
   try {
     const id = req.params.id;
-    
+
     if (!isMongooseIdValidation(id, res)) return;
 
     const result = await Post.findOne({ _id: id });
+
     if (result === null) {
-      res.status(404).json({
-        success: false,
-        message: "post not found based on id",
-      });
+      return errorHandler(res, "post not found based on id", 404);
     }
 
-    res.status(200).json({
-      success: true,
-      message: "post fetched successfully",
-      data: result,
-    });
+    return responseHandler(res, result, "post fetched successfully");
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
+    return errorHandler(res, error.message, 500);
   }
 };
 
@@ -90,21 +68,12 @@ const deletePost = async (req, res) => {
     if (!isMongooseIdValidation(id, res)) return;
     const response = await Post.findOneAndDelete({ _id: id });
     if (response === null) {
-      res.status(404).json({
-        success: false,
-        message: "something went wrong while deleting post",
-      });
+      return errorHandler(res, "something went wrong while deleting post");
     }
-    res.status(200).json({
-      success: false,
-      message: "Post Deleted successfully",
-    });
+    return responseHandler(res, "Post Deleted successfully");
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
+    return errorHandler(res, error.message);
   }
 };
 
-module.exports = { createPost, getPost, deletePost,getOnePost };
+module.exports = { createPost, getPost, deletePost, getOnePost };

@@ -16,11 +16,12 @@ const createUser = async (req, res) => {
 
     const response = bodyvalidator.createUserBodyValidation(req.body);
     if (response.error) {
-      errorHandler(res, response.error.details[0].message, 400);
+      return errorHandler(res, response.error.details[0].message, 400);
     }
 
     const encryptPassword = encryption(password);
-    const token = generateToken(res, {
+
+    const token = generateToken({
       name: name,
       password: encryptPassword,
       mobile_number: mobile_number,
@@ -38,58 +39,54 @@ const createUser = async (req, res) => {
     });
 
     if (!user) {
-      res.status(400).json({
-        success: false,
-        message: "User creation failed !!",
-      });
+      return errorHandler(res, "User creation failed !!");
     }
 
-    res.json({
-      success: true,
-      message: "User created successfully",
-      data: user,
-    });
+    return responseHandler(res, user, "User created successfully");
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    return errorHandler(res, error.message, 500);
   }
 };
 
 const login = async (req, res) => {
   try {
     if (!req.body.email || !req.body.password) {
-      errorHandler(res,'Please provide a body',400);
+      return errorHandler(res, "Please provide a body", 400);
     }
     const { email, password } = req.body;
 
     const user = await User.findOne({ email: email }).exec();
-    
+    user.token = "";
+
     if (!user) {
-      errorHandler(res,'User not found',404);
+      return errorHandler(res, "User not found", 404);
     }
 
     const plainPass = decryption(user.password);
-    
-    if (user.email === email && password === plainPass) { 
+
+    if (user.email === email && password === plainPass) {
       
       const token = generateToken({
-        name : user.name,
-        email:user.email,
-        password : user.password,
-        mobile_number : user.mobile_number,
-        role : user.role
+        _id : user._id,
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        mobile_number: user.mobile_number,
+        role: user.role,
+        token : user.token
       });
-      
-      const response = await User.findOneAndUpdate({_id:user._id},{token:token},{new : true})
-      responseHandler(res,response,'login success');      
-    }
-    else{
-      errorHandler(res,'Invalid Password !',400)
-    }
 
+      const response = await User.findOneAndUpdate(
+        { _id: user._id },
+        { token: token },
+        { new: true }
+      );
+      return responseHandler(res, response, "login success");
+    } else {
+      return errorHandler(res, "Invalid Password !", 400);
+    }
   } catch (error) {
-    errorHandler(res,error.message,400)
+    return errorHandler(res, error.message, 400);
   }
 };
 
