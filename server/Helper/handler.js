@@ -35,9 +35,9 @@ const generateToken = (user) => {
   });
 };
 
-const isAdminValidation = (req,res) =>{
-  if(req.user && req.user.role != 'Admin'){
-   return errorHandler(res,'You are not authorized user')
+const isAdminValidation = (res,user) =>{
+  if(user && user.role != 'Admin'){
+   return false;
   }
   else{
     return true;

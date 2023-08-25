@@ -5,7 +5,7 @@ const multer = require("multer");
 const path = require("path");
 const imageController = require('../controller/imageController');
 const userController = require('../controller/userController');
-
+const middleware = require('../middleware/auth')
 
 app.use(express.json())
 app.use(express.static("public"));
@@ -35,11 +35,11 @@ const upload = multer({
 });
 
 /* */
-app.post('/create-post',upload.single('image'),imageController.createPost)
+app.post('/create-post',middleware,upload.single('image'),imageController.createPost)
 
 app.get('/get-post',imageController.getPost)
 
-app.get('/delete-post/:id',imageController.deletePost)
+app.get('/delete-post/:id',middleware,imageController.deletePost)
 
 app.get('/get-post/:id',imageController.getOnePost)
 

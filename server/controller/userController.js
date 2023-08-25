@@ -56,12 +56,12 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email: email }).exec();
-    user.token = "";
+   
 
     if (!user) {
       return errorHandler(res, "User not found", 404);
     }
-
+    user.token = "";
     const plainPass = decryption(user.password);
 
     if (user.email === email && password === plainPass) {

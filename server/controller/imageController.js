@@ -5,12 +5,13 @@ const {
   responseHandler,
   isAdminValidation
 } = require("../Helper/handler");
-const auth = require('../middleware/auth');
 
 const createPost = async (req, res) => {
   try {
-    auth.middleware(req,res)
-    if(!isAdminValidation(res)) return;
+
+    if(!isAdminValidation(res,req.user)) {
+      return errorHandler(res,"You are not allowed to create a new post",401);
+    }
 
     const post = new Post({
       title: req.body.title,
@@ -64,6 +65,9 @@ const getOnePost = async (req, res) => {
 
 const deletePost = async (req, res) => {
   try {
+    if(!isAdminValidation(res,req.user)) {
+      return errorHandler(res,"You are not allowed to create a new post",401);
+    }
     var id = req.params.id;
     if (!isMongooseIdValidation(id, res)) return;
     const response = await Post.findOneAndDelete({ _id: id });
