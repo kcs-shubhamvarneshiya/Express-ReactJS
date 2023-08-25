@@ -3,14 +3,13 @@ const {
   isMongooseIdValidation,
   errorHandler,
   responseHandler,
-  isAdminValidation
+  isAdminValidation,
 } = require("../Helper/handler");
 
 const createPost = async (req, res) => {
   try {
-
-    if(!isAdminValidation(res,req.user)) {
-      return errorHandler(res,"You are not allowed to create a new post",401);
+    if (!isAdminValidation(res, req.user)) {
+      return errorHandler(res, "You are not allowed to create a new post", 401);
     }
 
     const post = new Post({
@@ -63,13 +62,41 @@ const getOnePost = async (req, res) => {
   }
 };
 
+const updatePost = async(req,res) =>{
+  try {
+
+    if(!isAdminValidation(res,req.user)){
+      return errorHandler(res,"You are nor allowws to update post",401)
+    }
+
+    var id = req.params.id;
+    const user = req.body;
+
+    if(!isMongooseIdValidation(id)){
+      return errorHandler(res,"Please Provide valid id",400)
+    }
+
+    const response = await Post.findOneAndUpdate({_id : id}, {user},{new : true})
+    if(!response){
+      return errorHandler(res,"Something went wrong while updating post");
+    }
+    return responseHandler(res,response,"post updated successfully");
+
+  } catch (error) {
+    return errorHandler(res, error.message,500);
+  }
+}
+
 const deletePost = async (req, res) => {
   try {
-    if(!isAdminValidation(res,req.user)) {
-      return errorHandler(res,"You are not allowed to create a new post",401);
+    if (!isAdminValidation(res, req.user)) {
+      return errorHandler(res, "You are not allowed to delete post", 401);
     }
     var id = req.params.id;
-    if (!isMongooseIdValidation(id, res)) return;
+
+    if (!isMongooseIdValidation(id)){
+      return errorHandler(res,"Please provide valid id");
+    } 
     const response = await Post.findOneAndDelete({ _id: id });
     if (response === null) {
       return errorHandler(res, "something went wrong while deleting post");
@@ -80,4 +107,4 @@ const deletePost = async (req, res) => {
   }
 };
 
-module.exports = { createPost, getPost, deletePost, getOnePost };
+module.exports = { createPost, getPost, deletePost, getOnePost,updatePost};

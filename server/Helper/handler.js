@@ -22,11 +22,11 @@ const responseHandler = (
   });
 };
 
-const isMongooseIdValidation = (id, res) => {
+const isMongooseIdValidation = (id) => {
   if (!isValidObjectId(id)) {
-    errorHandler(res, "Please Provide a valid id !", 400);
     return false;
   }
+  return true;
 };
 
 const generateToken = (user) => {

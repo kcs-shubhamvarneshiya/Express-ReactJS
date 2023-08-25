@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const connection = require('./Database/dbConnnection')
 const indexRoute = require('./routes/index');
 const morgan = require('morgan');
 app.use(morgan('dev'))
