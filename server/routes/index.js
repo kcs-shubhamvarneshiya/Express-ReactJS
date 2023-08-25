@@ -3,10 +3,13 @@ const app = express.Router();
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
-const imageController = require('../controller/imageController')
+const imageController = require("../controller/imageController");
+const userController = require("../controller/userController");
+const middleware = require("../middleware/auth");
 
+app.use(express.json());
 app.use(express.static("public"));
-app.use(cors())
+app.use(cors());
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -32,6 +35,23 @@ const upload = multer({
 });
 
 /* */
-app.post('/create-post',upload.single('image'),imageController.createPost)
+app.post(
+  "/create-post",
+  middleware,
+  upload.single("image"),
+  imageController.createPost
+);
+
+app.get("/get-post", imageController.getPost);
+
+app.delete("/delete-post/:id", middleware, imageController.deletePost);
+
+app.put("/update-post/:id", middleware, imageController.updatePost);
+
+app.get("/get-post/:id", imageController.getOnePost);
+
+app.post("/create-user", userController.createUser);
+
+app.post("/login", userController.login);
 
 module.exports = app;

@@ -1,0 +1,17 @@
+{
+    "type": "node",
+    "request": "launch",
+    "name": "Debug Node.js App",
+    "program": "${workspaceFolder}/server/index.js",
+    "args": [],
+    "cwd": "${workspaceFolder}",
+    "protocol": "inspector",
+    "runtimeVersion": "14.17.0",
+    "configurations": [
+        
+
+
+
+    ]
+  }
+  
