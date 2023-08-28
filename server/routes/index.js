@@ -5,7 +5,9 @@ const multer = require("multer");
 const path = require("path");
 const imageController = require("../controller/imageController");
 const userController = require("../controller/userController");
+const productController = require("../controller/productController");
 const middleware = require("../middleware/auth");
+const customerController = require("../controller/customerController");
 
 app.use(express.json());
 app.use(express.static("public"));
@@ -53,5 +55,9 @@ app.get("/get-post/:id", imageController.getOnePost);
 app.post("/create-user", userController.createUser);
 
 app.post("/login", userController.login);
+
+app.post("/product",productController.createProduct);
+
+app.post('/customer',customerController.createCustomer);
 
 module.exports = app;

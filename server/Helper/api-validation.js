@@ -1,5 +1,6 @@
 const Joi = require("Joi");
 const regex = require("../config/regex");
+const Ajv = require('ajv');
 
 const createUserBodyValidation = (body) => {
   let bodySchema = Joi.object({

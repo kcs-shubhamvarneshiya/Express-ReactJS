@@ -35,7 +35,7 @@ const generateToken = (user) => {
   });
 };
 
-const isAdminValidation = (res,user) =>{
+const isAdminValidation = (user) =>{
   if(user && user.role != 'Admin'){
    return false;
   }
