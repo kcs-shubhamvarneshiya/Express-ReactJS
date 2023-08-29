@@ -12,9 +12,8 @@ const customerSchema = mongoose.Schema({
         unique : true
     },
     mobile_number :{
-        type : 'number',
+        type : 'string',
         required : true,
-        min : [10,'mobile number must be 10 digit and got {VALUE}'],
     },
     address : {
         type : 'string',

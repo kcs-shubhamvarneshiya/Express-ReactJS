@@ -1,4 +1,5 @@
 const path = require("path");
+const fs = require("fs");
 const Customer = require("../Database/model/Customer");
 const {
   isMongooseIdValidation,
@@ -27,6 +28,10 @@ const createCustomer = async (req, res) => {
 
     if(!resp) return errorHandler(res,"Error creating customer",400);
 
+    if(!fs.existsSync(path.join(__dirname,"../public/csv"))){
+        fs.mkdirSync(path.join(__dirname,"../public/csv"));
+    }
+
     const filePath = path.join(__dirname, "../public/csv/sample.csv");
 
     const csvWritter = createCsvWriter({
@@ -43,15 +48,13 @@ const createCustomer = async (req, res) => {
     csvWritter
       .writeRecords(customer)
       .then((result) => {
-        responseHandler(res, response, "Record inserted successfully");
+        return responseHandler(res, response, "Record inserted successfully");
       })
       .catch((error) => {
         return errorHandler(res, error,500);
       });
   } catch (err) {
-    if(err.isJoi === true) {
-        return errorHandler(res, err,422)
-    }
+    if(err.isJoi === true) return errorHandler(res, err,422)
     return errorHandler(res, err, 500);
   }
 };

@@ -3,12 +3,27 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const errorHandler = (res, error, status = 400) => {
-  
-  console.log(error)
+  var message = "";
+
+  console.log(error.details[0].type);
+
+  switch (error.code || error.details[0].type) {
+    case 11000:
+      message = `${error.keyValue.email} is already in use`;
+      break;
+
+    case "string.pattern.base":
+      message = `Please enter valid ${error.details[0].context.label}`;
+      break;
+
+    default:
+      message = error.message;
+      break;
+  }
 
   return res.status(status).json({
     success: false,
-    msg: error,
+    msg: message,
   });
 };
 
@@ -38,14 +53,13 @@ const generateToken = (user) => {
   });
 };
 
-const isAdminValidation = (user) =>{
-  if(user && user.role != 'Admin'){
-   return false;
-  }
-  else{
+const isAdminValidation = (user) => {
+  if (user && user.role != "Admin") {
+    return false;
+  } else {
     return true;
-  }  
-}
+  }
+};
 
 module.exports = {
   responseHandler,

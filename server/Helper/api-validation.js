@@ -1,45 +1,38 @@
 const Joi = require("@hapi/joi");
 const regex = require("../config/regex");
 
-const createUserBodyValidation = (body) => {
-  let bodySchema = Joi.object({
-    name: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z .]+$"))
-      .message({ "string.pattern.base": "Please enter a valid name" })
-      .required(),
+const createUserBodyValidation = Joi.object({
+  name: Joi.string()
+    .regex(/^[a-zA-Z .]+$/)
+    .required(),
 
-    password: Joi.string()
-      .pattern(
-        new RegExp("^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$")
-      )
-      .message({ "string.pattern.base": "please enter a valid password" })
-      .required(),
+  password: Joi.string()
+    .regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
+    .required(),
 
-    mobile_number: Joi.string()
-      .pattern(new RegExp("^[0-9]{10}$"))
-      .message("Please enter a valid phone number")
-      .required(),
+  mobile_number: Joi.string()
+    .regex(/^[0-9]{10}$/)
+    .required(),
 
-    email: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"))
-      .message({ "string.pattern.base": "Please enter a valid email address" })
-      .required(),
+  email: Joi.string()
+    .regex(/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/)
+    .required(),
 
-    role: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z .]+$"))
-      .message({ "string.pattern.base": "Please enter a valid email address" })
-      .required(),
-  });
-  return bodySchema.validate(body);
-};
+  role: Joi.string()
+    .regex(/^[a-zA-Z .]+$/)
+    .required(),
+});
 
 const createCustBodyValidation = Joi.object({
-  name : Joi.string().required(),
-  email : Joi.string().email().required(),
-  mobile_number : Joi.number().strict().required(),
-  address : Joi.string().required()
-
-})
+  name: Joi.string().required(),
+  email: Joi.string()
+    .regex(/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/)
+    .required(),
+  mobile_number: Joi.string()
+    .regex(/[0-9]{10,10}/)
+    .required(),
+  address: Joi.string().required(),
+});
 
 const userLoginBodyValidation = (body) => {
   let loginSchema = Joi.object({

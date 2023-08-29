@@ -14,11 +14,8 @@ const createUser = async (req, res) => {
   try {
     const { name, password, mobile_number, email, role } = req.body;
 
-    const response = createUserBodyValidation(req.body);
-    if (response.error) {
-      return errorHandler(res, response.error.details[0].message, 400);
-    }
-
+    const response = await createUserBodyValidation.validateAsync(req.body);
+    
     const encryptPassword = encryption(password);
 
     const token = generateToken({
@@ -42,7 +39,7 @@ const createUser = async (req, res) => {
       return errorHandler(res, "User creation failed !!");
     }
 
-    return responseHandler(res, user, "User created successfully");
+    return responseHandler(res, response, "User created successfully");
   } catch (error) {
     return errorHandler(res, error.message, 500);
   }
