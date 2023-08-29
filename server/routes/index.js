@@ -8,7 +8,6 @@ const userController = require("../controller/userController");
 const productController = require("../controller/productController");
 const middleware = require("../middleware/auth");
 const customerController = require("../controller/customerController");
-
 app.use(express.json());
 app.use(express.static("public"));
 app.use(cors());

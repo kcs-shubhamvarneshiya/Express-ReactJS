@@ -1,6 +1,5 @@
-const Joi = require("Joi");
+const Joi = require("@hapi/joi");
 const regex = require("../config/regex");
-const Ajv = require('ajv');
 
 const createUserBodyValidation = (body) => {
   let bodySchema = Joi.object({
@@ -34,6 +33,14 @@ const createUserBodyValidation = (body) => {
   return bodySchema.validate(body);
 };
 
+const createCustBodyValidation = Joi.object({
+  name : Joi.string().required(),
+  email : Joi.string().email().required(),
+  mobile_number : Joi.number().strict().required(),
+  address : Joi.string().required()
+
+})
+
 const userLoginBodyValidation = (body) => {
   let loginSchema = Joi.object({
     email: Joi.string().required().email(),
@@ -44,8 +51,12 @@ const userLoginBodyValidation = (body) => {
 
   if (validError) {
     return validError;
-  } 
+  }
   return;
 };
 
-module.exports = { createUserBodyValidation, userLoginBodyValidation };
+module.exports = {
+  createUserBodyValidation,
+  userLoginBodyValidation,
+  createCustBodyValidation,
+};

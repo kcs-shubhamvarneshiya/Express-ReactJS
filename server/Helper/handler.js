@@ -2,10 +2,13 @@ const { isValidObjectId } = require("mongoose");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const errorHandler = (res, message, status = 400) => {
+const errorHandler = (res, error, status = 400) => {
+  
+  console.log(error)
+
   return res.status(status).json({
     success: false,
-    msg: message,
+    msg: error,
   });
 };
 
