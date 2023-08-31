@@ -55,7 +55,7 @@ app.post("/create-user", userController.createUser);
 
 app.post("/login", userController.login);
 
-app.post("/product",productController.createProduct);
+app.post("/product",middleware,productController.createProduct);
 
 app.post('/customer',customerController.createCustomer);
 

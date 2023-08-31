@@ -19,10 +19,10 @@ const customerSchema = mongoose.Schema({
         type : 'string',
         required : true
     },
-    product : {
+    product : [{
         type: mongoose.Schema.Types.ObjectId,
         ref : 'Product'
-    }
+    }]
 })
 
 module.exports = mongoose.model('Customer', customerSchema);

@@ -1,5 +1,6 @@
 const Product = require('../Database/model/Product');
-const PRODUCT = require('../Database/model/Product')
+const Customer = require('../Database/model/Customer');
+
 const {
     isMongooseIdValidation,
     errorHandler,
@@ -9,9 +10,13 @@ const {
 
   const createProduct = async (req,res)=>{
     try{
+
+      if (!isAdminValidation(req.user)) {
+        return errorHandler(res, "You are not allowed to create a new post", 401);
+      }
         const {name,sku,mrp} = req.body;
 
-        const product = new PRODUCT({
+        const product = new Product({
             name : name,
             sku : sku,
             mrp :mrp

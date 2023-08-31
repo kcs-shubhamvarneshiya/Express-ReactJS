@@ -5,19 +5,25 @@ require("dotenv").config();
 const errorHandler = (res, error, status = 400) => {
   var message = "";
 
-  console.log(error.details[0].type);
-
-  switch (error.code || error.details[0].type) {
+  switch (error.code || error ) {
     case 11000:
       message = `${error.keyValue.email} is already in use`;
       break;
 
-    case "string.pattern.base":
-      message = `Please enter valid ${error.details[0].context.label}`;
+    case error:
+      if (typeof(error) === "string") {
+        message = error;
+      } else {
+        if (error.details[0].type === "string.pattern.base") {
+          message = `Please enter valid ${error.details[0].context.label}`;
+        } else {
+          message = error.message;
+        }
+      }
       break;
 
     default:
-      message = error.message;
+      message = "Something went wrong !";
       break;
   }
 
