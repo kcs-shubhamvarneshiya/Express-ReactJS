@@ -1,32 +1,43 @@
-import React,{ useState } from 'react';
+import React, { useState } from "react";
 import NavbarComponent from "./NavbarComponent";
 import userService from "../services/userService";
+import { isAxiosError } from "axios";
 
 export default function LoginComponent() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
-
-  const handleSubmit = async(event)=>{
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("password", password);
+    try {
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
 
-    const result = await userService.login(formData);
-    console.log(result)
-    if(result.data.success === true) {
-      alert("login successful")
+      const result = await userService.login(formData);
+      console.log(result.data.Message)
+      setMessage(result.data.Message);
+
+      
+    } catch (error) {
+      const err = isAxiosError(error);
+      console.log(error.response.data.msg)
+      if (err) {
+        setMessage(String(error?.response?.data?.msg));
+      }
     }
-    else{
-      alert("something went wrong")
-    }
-  }
+
+    setTimeout(() => {
+      setMessage("");
+    }, 5000);
+    event.target.reset();
+  };
 
   return (
     <div>
-      <NavbarComponent/>
+      <NavbarComponent />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label for="exampleInputEmail1">Email address</label>
@@ -58,6 +69,7 @@ export default function LoginComponent() {
           Submit
         </button>
       </form>
+      <p>{message}</p>
     </div>
-  )
+  );
 }
