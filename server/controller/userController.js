@@ -47,6 +47,7 @@ const createUser = async (req, res) => {
 
 const login = async (req, res) => {
   try {
+    console.log(req.body)
     if (!req.body.email || !req.body.password) {
       return errorHandler(res, "Please provide a body", 400);
     }
