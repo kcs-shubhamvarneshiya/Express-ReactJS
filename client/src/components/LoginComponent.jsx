@@ -31,6 +31,7 @@ export default function LoginComponent() {
         setOpen(true)
       }
     }
+
   };
 
   const handleClose = (event, reason) => {
@@ -74,7 +75,7 @@ export default function LoginComponent() {
           Submit
         </button>
       </form>
-      <p>{message}</p>
+     
       <Snackbar
         open={open}
         autoHideDuration={6000} // The duration the Snackbar will be displayed (in milliseconds)
@@ -84,9 +85,9 @@ export default function LoginComponent() {
           elevation={6}
           variant="filled"
           onClose={handleClose}
-          severity="success" // You can use 'success', 'error', 'warning', or 'info'
+          severity="error"
         >
-          This is a Snackbar message!
+         {message}
         </MuiAlert>
       </Snackbar>
     </div>
