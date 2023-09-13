@@ -5,6 +5,11 @@ const User = require("../Database/model/User");
 
 module.exports = async (req, res, next) => {
   try {
+
+    if(!req.headers.authorization){
+      return errorHandler(res,"Please pass the token in header",400);
+    }
+
     const token = req.headers.authorization.split(" ")[1];
 
     const user = jwt.verify(token, process.env.JWT_SECRET);
@@ -16,6 +21,6 @@ module.exports = async (req, res, next) => {
     req.user = data;
     return next();
   } catch (error) {
-    errorHandler(res,error.message,500)
+    errorHandler(res,error,500)
   }
 };

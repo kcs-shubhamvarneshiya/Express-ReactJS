@@ -6,7 +6,7 @@ const {
   responseHandler,
 } = require("../Helper/handler");
 const { encryption, decryption } = require("../Helper/encryption-decryption");
-const bodyvalidator = require("../Helper/api-validation");
+const {createUserBodyValidation} = require("../Helper/api-validation");
 require("dotenv").config();
 require("../Database/dbConnnection");
 
@@ -14,11 +14,8 @@ const createUser = async (req, res) => {
   try {
     const { name, password, mobile_number, email, role } = req.body;
 
-    const response = bodyvalidator.createUserBodyValidation(req.body);
-    if (response.error) {
-      return errorHandler(res, response.error.details[0].message, 400);
-    }
-
+    const response = await createUserBodyValidation.validateAsync(req.body);
+    
     const encryptPassword = encryption(password);
 
     const token = generateToken({
@@ -42,7 +39,7 @@ const createUser = async (req, res) => {
       return errorHandler(res, "User creation failed !!");
     }
 
-    return responseHandler(res, user, "User created successfully");
+    return responseHandler(res, response, "User created successfully");
   } catch (error) {
     return errorHandler(res, error.message, 500);
   }
@@ -50,6 +47,7 @@ const createUser = async (req, res) => {
 
 const login = async (req, res) => {
   try {
+    console.log(req.body)
     if (!req.body.email || !req.body.password) {
       return errorHandler(res, "Please provide a body", 400);
     }
@@ -89,5 +87,6 @@ const login = async (req, res) => {
     return errorHandler(res, error.message, 400);
   }
 };
+
 
 module.exports = { createUser, login };

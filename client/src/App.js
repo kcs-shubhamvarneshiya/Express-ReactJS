@@ -1,11 +1,12 @@
-import './App.css';
-import PostComponents from './components/PostComponent.jsx'
+import NavbarComponent from "./components/NavbarComponent";
 
 function App() {
   return (
-    <div className="App">
-     <PostComponents/>
-    </div>
+    <>
+      <div className="App">
+        <NavbarComponent email="simba"/>
+      </div>
+    </>
   );
 }
 

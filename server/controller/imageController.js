@@ -8,7 +8,7 @@ const {
 
 const createPost = async (req, res) => {
   try {
-    if (!isAdminValidation(res, req.user)) {
+    if (!isAdminValidation(req.user)) {
       return errorHandler(res, "You are not allowed to create a new post", 401);
     }
 
@@ -48,8 +48,9 @@ const getOnePost = async (req, res) => {
   try {
     const id = req.params.id;
 
-    if (!isMongooseIdValidation(id, res)) return;
-
+    if(!isMongooseIdValidation(id)){
+      return errorHandler(res,"Please Provide valid id",400)
+    }
     const result = await Post.findOne({ _id: id });
 
     if (result === null) {
@@ -65,7 +66,7 @@ const getOnePost = async (req, res) => {
 const updatePost = async(req,res) =>{
   try {
 
-    if(!isAdminValidation(res,req.user)){
+    if(!isAdminValidation(req.user)){
       return errorHandler(res,"You are nor allowws to update post",401)
     }
 
@@ -89,7 +90,7 @@ const updatePost = async(req,res) =>{
 
 const deletePost = async (req, res) => {
   try {
-    if (!isAdminValidation(res, req.user)) {
+    if (!isAdminValidation(req.user)) {
       return errorHandler(res, "You are not allowed to delete post", 401);
     }
     var id = req.params.id;
