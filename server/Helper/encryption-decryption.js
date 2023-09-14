@@ -1,5 +1,4 @@
 const CryptoJS = require("crypto-js");
-const {errorHandler} = require('./handler');
 require('dotenv').config()
 
 const encryption = (password)=>{
