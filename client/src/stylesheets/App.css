@@ -1,1 +1,184 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Quicksand:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Quicksand:wght@500;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Quicksand:wght@400;500&family=Rubik:wght@600&display=swap');
+
+* {
+    box-sizing: border-box;
+  }
+ 
+  *:focus {
+    outline: none;
+}
+  body {
+    margin: 0px;
+    font-family: "Montserrat" !important;
+    /* font-family: 'Rubik', sans-serif; */
+  }
+
+  /* N A V B A R */
+
+  .nav {
+    height: 50px;
+    width: 100%;
+    background-color: #fff;
+    position: relative;
+  }
+  
+  .nav > .nav-header {
+    display: inline;
+  }
+  
+  .nav > .nav-header > .nav-title {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    padding: 10px 10px 10px 10px;
+  }
+  
+  .nav > .nav-btn {
+    display: none;
+  }
+  
+  .nav > .nav-links {
+    display: inline;
+    float: right;
+    font-size: 15px;
+  }
+  
+  .nav > .nav-links > a {
+    font-weight: 600;
+    display: inline-block;
+    padding: 13px 10px 13px 10px;
+    text-decoration: none;
+    color: #000000;
+  }
+  
+  .nav > .nav-links > a:hover {
+    background-color: #FFA500;
+    color: #ffffff;
+  }
+  
+  .nav > #nav-check {
+    display: none;
+  }
+  
+  @media (max-width:600px) {
+    .nav > .nav-btn {
+      display: inline-block;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+    }
+    .nav > .nav-btn > label {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      padding: 13px;
+    }
+    .nav > .nav-btn > label:hover,.nav  #nav-check:checked ~ .nav-btn > label {
+      background-color: #ffffff;
+    }
+    .nav > .nav-btn > label > span {
+      display: block;
+      width: 25px;
+      height: 10px;
+      border-top: 2px solid #000000;
+    }
+    .nav > .nav-links {
+      position: absolute;
+      display: block;
+      width: 100%;
+      background-color: #ffffff;
+      height: 0px;
+      transition: all 0.3s ease-in;
+      overflow-y: hidden;
+      top: 50px;
+      left: 0px;
+    }
+    .nav > .nav-links > a {
+      display: block;
+      width: 100%;
+    }
+    .nav > #nav-check:not(:checked) ~ .nav-links {
+      height: 0px;
+    }
+    .nav > #nav-check:checked ~ .nav-links {
+      height: calc(100vh - 50px);
+      overflow-y: auto;
+    }
+  }
+
+  /* S L I D E R */
+ 
+  
+  /* L O G I N */
+
+  .loginContainer{
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  width: 400px;
+  max-height: 550px;
+  max-width: 450px;
+  font-weight: 600;
+  position: absolute;
+  background-color: #ffffff;
+  color : #000000;
+  }
+
+  .login-sub-container{
+    padding: 30px;
+  }
+
+  .loginContainer img{
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+  }
+   .form-header h3{
+    font-weight: 600;
+    margin: auto;
+    text-align: center;
+  }
+
+  .form-field-box{
+    margin-top: 10px;
+    border-bottom: 2px solid #000000;
+  }
+
+  .form-field-box input{
+    display: block;
+    font-weight: 600;
+    margin-right: auto;
+    margin-left: auto;
+    width: 230px;
+    border-style: none;
+    
+  }
+
+  .password-toggle{
+    display: inline-block;
+    cursor: pointer;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+  }
+
+  .form-field-button button{
+    padding :5px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 120px;
+    border-style: none;
+    max-width: 150px;
+    background-color: #FFA500;
+    color : #ffffff;
+  }
+
+   .form-field-extra a,p{
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+  }

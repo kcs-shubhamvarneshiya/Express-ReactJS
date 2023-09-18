@@ -1,10 +1,13 @@
 import NavbarComponent from "./components/NavbarComponent";
-import "../src/stylesheets/App.css"
+import SliderComponent from "./components/SliderComponent";
+import "../src/stylesheets/App.css";
+
 function App() {
   return (
     <>
       <div className="App">
-        <NavbarComponent/>  
+        <NavbarComponent/>
+        <SliderComponent/>   
       </div>
     </>
   );

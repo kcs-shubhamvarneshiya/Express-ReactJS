@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import NavbarComponent from "./NavbarComponent";
 import userService from "../services/userService";
 import { isAxiosError } from "axios";
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import "../stylesheets/App.css";
 
 export default function LoginComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [open,setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [icon, setIcon] = useState("fa-regular fa-eye-slash");
+  const [type, setType] = useState("password");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,74 +23,102 @@ export default function LoginComponent() {
       formData.append("password", password);
 
       const result = await userService.login(formData);
-     
+
       setMessage(result.data.Message);
-      setOpen(true)
-      
+      setOpen(true);
     } catch (error) {
       const err = isAxiosError(error);
       if (err) {
         setMessage(String(error?.response?.data?.msg));
-        setOpen(true)
+        setOpen(true);
       }
     }
-
   };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
     setOpen(false);
   };
+
+  const pswToggle = () => {
+    if (type === "password") {
+      setIcon("fa-regular fa-eye");
+      setType("text");
+    } else {
+      setIcon("fa-regular fa-eye-slash");
+      setType("password");
+    }
+  };
+
   return (
-    <div>
-      <NavbarComponent />
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-            onChange={(event) => setEmail(event.target.value)}
-            required
-          />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
+    <div className="model" id="loginModal">
+      <NavbarComponent color="black" bgcolor="white" />
+      <div className="loginContainer">
+        <img src="svg/loginWave.svg" alt="" />
+        <div className="login-sub-container">
+          <div className="form-header">
+            <h3>SignIn</h3>
+          </div>
+          <form onSubmit={handleSubmit} className="modal-content animate">
+            <div className="container">
+              <div className="form-field-box">
+                <div className="password-toggle">
+                  <input
+                    type="text"
+                    placeholder="Enter Email"
+                    name="uname"
+                    onChange={(event) => setEmail(event.target.value)}
+                    required
+                  />
+                </div>
+                <div className="password-toggle"></div>
+              </div>
+              <br />
+
+              <div className="form-field-box">
+                <div className="password-toggle">
+                  <input
+                    type={type}
+                    placeholder="Enter Password"
+                    name="psw"
+                    onChange={(event) => setPassword(event.target.value)}
+                    required
+                  />
+                </div>
+                <div className="password-toggle">
+                  <span onClick={pswToggle}>
+                    <i className={icon}></i>
+                  </span>
+                </div>
+              </div>
+
+              <br />
+              <div className="form-field-button">
+                <button type="submit">Login</button>
+              </div>
+            </div>
+          </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-            placeholder="Password"
-            onChange={(event) => setPassword(event.target.value)}
-            required
-          />
+        <div className="form-field-extra">
+          <p>
+            <a href="/">Forgot password?</a>
+          </p>
+          <p>
+            New in site ?<a href="/"> Sign Up</a>
+          </p>
         </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
-     
-      <Snackbar
-        open={open}
-        autoHideDuration={6000} // The duration the Snackbar will be displayed (in milliseconds)
-        onClose={handleClose}
-      >
+      </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <MuiAlert
           elevation={6}
           variant="filled"
           onClose={handleClose}
           severity="error"
         >
-         {message}
+          {message}
         </MuiAlert>
       </Snackbar>
     </div>
