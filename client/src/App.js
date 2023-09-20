@@ -1,10 +1,13 @@
 import NavbarComponent from "./components/NavbarComponent";
+import SliderComponent from "./components/SliderComponent";
+import "../src/stylesheets/App.css";
 
 function App() {
   return (
     <>
       <div className="App">
-        <NavbarComponent email="simba"/>
+        <NavbarComponent/>
+        <SliderComponent/>   
       </div>
     </>
   );
