@@ -26,7 +26,7 @@ const errorHandler = (res, error, status = 400) => {
       message = "Something went wrong !";
       break;
   }
-
+  console.log(message)
   return res.status(status).json({
     success: false,
     msg: message,

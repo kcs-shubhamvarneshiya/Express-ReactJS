@@ -24,11 +24,13 @@ export default function LoginComponent() {
       formData.append("password", password);
 
       const result = await userService.login(formData);
+      setResType("success");
       setMessage(result.data.Message);
       setOpen(true);
     } catch (error) {
       const err = isAxiosError(error);
       if (err) {
+        setResType("error");
         setMessage(String(error?.response?.data?.msg));
         setOpen(true);
       }
@@ -107,7 +109,7 @@ export default function LoginComponent() {
             <a href="/">Forgot password?</a>
           </p>
           <p>
-            New in site ?<a href="/"> Sign Up</a>
+            New in site ?<a href="/register"> Sign Up</a>
           </p>
         </div>
       </div>
