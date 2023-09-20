@@ -13,6 +13,7 @@ export default function LoginComponent() {
   const [open, setOpen] = useState(false);
   const [icon, setIcon] = useState("fa-regular fa-eye-slash");
   const [type, setType] = useState("password");
+  const [resType,setResType] = useState("error"); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,7 +24,6 @@ export default function LoginComponent() {
       formData.append("password", password);
 
       const result = await userService.login(formData);
-
       setMessage(result.data.Message);
       setOpen(true);
     } catch (error) {
@@ -111,12 +111,12 @@ export default function LoginComponent() {
           </p>
         </div>
       </div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
         <MuiAlert
           elevation={6}
           variant="filled"
           onClose={handleClose}
-          severity="error"
+          severity={resType}
         >
           {message}
         </MuiAlert>

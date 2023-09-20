@@ -12,7 +12,19 @@ import axios from "axios";
     };
     return axios.post(url, formData, config)
   }
+
+  const register = (formData)=>{
+
+    const url = ``;
+
+    const config = {
+      header : {
+        "content-type": "application/json",
+      }
+    };
+    return axios.post(url,formData,config)
+  }
  
 
-  export default {login}
+  export default {login,register}
 
