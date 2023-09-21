@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { FormControl, FormLabel } from "@mui/material";
 import NavbarComponent from "./NavbarComponent";
-import userService from "../services/userService";
+import userService from "../../services/userService";
 import { isAxiosError } from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";

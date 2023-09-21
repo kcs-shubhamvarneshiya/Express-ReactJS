@@ -3,10 +3,9 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ShowComponent from "./components/ShowComponent"
-import LoginComponent from "./components/LoginComponent";
-import DemoComponent from "./components/DemoComponent";
-import { RegisterComponent } from "./components/RegisterComponent";
+import ShowComponent from "./components/User/ShowComponent"
+import LoginComponent from "./components/User/LoginComponent";
+import { RegisterComponent } from "./components/User/RegisterComponent";
 
 export default function Index() {
   return (
