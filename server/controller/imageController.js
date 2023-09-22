@@ -15,7 +15,7 @@ const createPost = async (req, res) => {
     const post = new Post({
       title: req.body.title,
       date: req.body.date,
-      image: req.file.filename,
+      image: req.file.originalname,
     });
 
     const result = await post.save();
