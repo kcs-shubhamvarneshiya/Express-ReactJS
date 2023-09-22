@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import NavbarComponent from "./NavbarComponent";
-import userService from "../services/userService";
+import userService from "../../services/userService";
 import { isAxiosError } from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import "../stylesheets/App.css";
+import "../../stylesheets/App.css";
 
 export default function LoginComponent() {
   const [email, setEmail] = useState("");
@@ -56,8 +56,9 @@ export default function LoginComponent() {
   };
 
   return (
+    <>
+    <NavbarComponent color="black" bgcolor="white" />
     <div className="model" id="loginModal">
-      <NavbarComponent color="black" bgcolor="white" />
       <div className="loginContainer">
         <img src="svg/loginWave.svg" alt="" />
         <div className="login-sub-container">
@@ -124,5 +125,6 @@ export default function LoginComponent() {
         </MuiAlert>
       </Snackbar>
     </div>
+    </>
   );
 }

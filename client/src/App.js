@@ -1,5 +1,5 @@
-import NavbarComponent from "./components/NavbarComponent";
-import SliderComponent from "./components/SliderComponent";
+import NavbarComponent from "./components/User/NavbarComponent";
+import SliderComponent from "./components/User/SliderComponent";
 import "../src/stylesheets/App.css";
 
 function App() {

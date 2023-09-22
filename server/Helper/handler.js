@@ -3,30 +3,36 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const errorHandler = (res, error, status = 400) => {
-  var message = "";
+  let message = "";
 
-  switch (error.code || error ) {
-    case 11000:
-      message = `${error.keyValue.email} is already in use`;
-      break;
-
-    case error:
-      if (typeof(error) === "string") {
-        message = error;
-      } else {
-        if (error.details[0].type === "string.pattern.base") {
-          message = `Please enter valid ${error.details[0].context.label}`;
-        } else {
-          message = error.message;
-        }
-      }
-      break;
-
-    default:
-      message = "Something went wrong !";
-      break;
+  if (error.keyPattern) {
+    message =
+    Object.keys(error.keyPattern) == "mobile_number"
+        ? "Mobile number is already exist"
+        : "Email is already exist";
+  } else if (error.details) {
+    const path = error.details[0].context.label;
+    switch (path) {
+      case "email":
+        message = "Please Enter valid email id";
+        break;
+      case "mobile_number":
+        message = "Please Enter valid mobile number";
+        break;
+      case "password":
+        message =
+          "Password should contain at least one special character and alphanumeric characters";
+        break;
+      default:
+        message = "Please enter a valid name";
+    }
+  }else if(typeof(error) === "string") {
+    message = error;
+  } 
+  else {
+    message = error.message;
   }
-  console.log(message)
+
   return res.status(status).json({
     success: false,
     msg: message,

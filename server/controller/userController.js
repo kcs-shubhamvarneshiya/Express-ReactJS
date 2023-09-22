@@ -14,26 +14,17 @@ const createUser = async (req, res) => {
   try {
     const { name, password, mobile_number, email, role } = req.body;
 
+    //validate request body
     const response = await createUserBodyValidation.validateAsync(req.body);
     
+    //encrypt password
     const encryptPassword = encryption(password);
 
-    const token = generateToken({
-      name: name,
-      password: encryptPassword,
-      mobile_number: mobile_number,
-      email: email,
-      role: role,
-    });
+    // generate token 
+    const token = generateToken({ name, password: encryptPassword, mobile_number, email, role });
 
-    const user = await User.create({
-      name: name,
-      password: encryptPassword,
-      mobile_number: mobile_number,
-      email: email,
-      role: role,
-      token: token,
-    });
+    // save user to database
+    const user = await User.create({ name, password: encryptPassword, mobile_number, email, role, token });
 
     if (!user) {
       return errorHandler(res, "User creation failed !!");
@@ -41,52 +32,55 @@ const createUser = async (req, res) => {
 
     return responseHandler(res, response, "User created successfully");
   } catch (error) {
-    return errorHandler(res, error.message, 500);
+    return errorHandler(res, error, 500);
   }
 };
 
 const login = async (req, res) => {
   try {
-    console.log(req.body)
-    if (!req.body.email || !req.body.password) {
-      return errorHandler(res, "Please provide a body", 400);
-    }
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email: email }).exec();
-   
+    // validate request body
+    if (!email || !password) {
+      return errorHandler(res, "Please provide email and password", 400);
+    }
+
+    // find user by email 
+    const user = await User.findOne({ email }).exec();
 
     if (!user) {
       return errorHandler(res, "User not found", 404);
     }
-    user.token = "";
+
+    // decrypt password
     const plainPass = decryption(user.password);
 
-    if (user.email === email && password === plainPass) {
-      
+
+    if (email === user.email && password === plainPass) {
       const token = generateToken({
-        _id : user._id,
+        _id: user._id,
         name: user.name,
         email: user.email,
-        password: user.password,
         mobile_number: user.mobile_number,
         role: user.role,
-        token : user.token
       });
 
-      const response = await User.findOneAndUpdate(
-        { _id: user._id },
-        { token: token },
+      //update user's token
+      const response = await User.findByIdAndUpdate(
+        user._id,
+        { token },
         { new: true }
       );
-      return responseHandler(res, response, "login success");
+
+      return responseHandler(res, response, "Login success");
     } else {
-      return errorHandler(res, "Invalid Password !", 400);
+      return errorHandler(res, "Invalid Password!", 400);
     }
   } catch (error) {
-    return errorHandler(res, error.message, 400);
+    return errorHandler(res, error, 500);
   }
 };
+
 
 
 module.exports = { createUser, login };

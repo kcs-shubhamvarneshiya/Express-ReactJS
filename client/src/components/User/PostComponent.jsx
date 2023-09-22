@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import postService from "../services/postService";
+import postService from "../../services/postService";
 
 export default function PostComponent() {
   
