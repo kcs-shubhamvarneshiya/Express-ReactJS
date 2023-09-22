@@ -1,5 +1,4 @@
 import React from "react";
-import "../../stylesheets/index.css";
 
 export default function NavbarComponent(props) {
 

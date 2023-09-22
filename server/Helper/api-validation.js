@@ -7,7 +7,7 @@ const createUserBodyValidation = Joi.object({
     .required(),
 
   password: Joi.string()
-    .regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)
+    .regex(/^(?=.*[0-9])(?=.*[!@#$%^><&*])[a-zA-Z0-9!@#$%><^&*]{6,16}$/)
     .required(),
 
   mobile_number: Joi.string()
