@@ -1,12 +1,10 @@
 const Product = require("../Database/model/Product");
 const Category = require("../Database/model/Category");
 const {
-  isMongooseIdValidation,
   errorHandler,
   responseHandler,
   isAdminValidation,
 } = require("../Helper/handler");
-
 
 const createProduct = async (req, res) => {
   try {
@@ -58,6 +56,5 @@ const createProduct = async (req, res) => {
     return errorHandler(res, err.message, 500);
   }
 };
-
 
 module.exports = { createProduct };

@@ -13,9 +13,9 @@ export default function AdminNavbarComponent() {
     return (
         <div className='app'>
             {/* Navbar */}
-            <div className='nav'>
-                <div className='nav-header'>
-                    <div className='nav-title'>
+            <div className='admin-nav'>
+                <div className='admin-nav-header'>
+                    <div className='admin-nav-title'>
                         <h4>SemiWaves</h4>
                     </div>
                 </div>

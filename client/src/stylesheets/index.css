@@ -1,32 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Quicksand&display=swap');
-*{
-  padding: 0px;
-  margin: 0px;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Paytone+One&family=Quicksand:wght@400;500&display=swap');
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-.app{
-  display: flex;
+body {
   background-color: #ffffff;
-  height: 100vh;
+  font-family: monospace;
+  color: #000000;
+}
+
+p{
+  padding: 0px;
+  margin: 0px;
+  font-size: 45px;
+  font-weight: 900;
+  font-family: 'Paytone One', sans-serif;
+}
+.wrapper {
+  height: 10vh;
   width: auto;
-  flex-direction: column;
-  font-family: 'Montserrat', sans-serif;
-}
-
-/**/
-.nav-header{
-  width: 100%;
-  background-color: #02305f;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  padding: 1%;
-  border: 0.1rem solid #f4ebeb;
 }
 
-.nav-title h4{
-  color: white;
-  font-weight: 600;
+.effect-wrapper {
+  text-align: center;
+  font-weight: normal;
+}
+
+#typed {
+  font-weight: bold;
+  color: #ffa500;
+}
+
+.cursor {
+  display: inline-block;
+  background-color: #b0ff95;
+  animation: blinker 800ms infinite;
+}
+
+.cursor.typing-true {
+  animation: none;
+}
+
+@keyframes blinker {
+	0% { background-color: #000000; }
+	50% { background-color: transparent; }
+	100% { background-color: #000000; }
 }
