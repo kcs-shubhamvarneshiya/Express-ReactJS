@@ -1,39 +1,35 @@
-const typedSpan = document.getElementById("typed")
-const totype = ["Features","Security"]
+var spanText = document.getElementById("typed")
+var wordSet = ["Features","Security"]
 
-const delayTyping_char = 200;
-const delayErasing_text = 150;
-const delayTyping_text = 3000;
-
-let totypeIndex = 0;
-let charIndex = 0;
+var wordsIndex = 0;
+var charIndex = 0;
 
 function typeText() {
-	if (charIndex < totype[totypeIndex].length) {
-		typedSpan.textContent += totype[totypeIndex].charAt(charIndex);
+	if (charIndex < wordSet[wordsIndex].length) {
+		spanText.textContent += wordSet[wordsIndex].charAt(charIndex);
 		charIndex++;
-		setTimeout(typeText, delayTyping_char);
+		setTimeout(typeText, 200);
 	}
 	else {
-		setTimeout(eraseText, delayTyping_text);
+		setTimeout(eraseText, 3000);
 	}
 }
 
 function eraseText() {
 	if (charIndex > 0) {
-		typedSpan.textContent = totype[totypeIndex].substring(0, charIndex-1);
+		spanText.textContent = wordSet[wordsIndex].substring(0, charIndex-1);
 		charIndex = charIndex-1;
-		setTimeout(eraseText, delayErasing_text);
+		setTimeout(eraseText, 150);
 	}
 	else {
-		totypeIndex++;
+		wordsIndex++;
 
-		if (totypeIndex >= totype.length)
-			totypeIndex = 0;
-			setTimeout(typeText, delayTyping_text);
+		if (wordsIndex >= wordSet.length)
+			wordsIndex = 0;
+			setTimeout(typeText, 3000);
 	}
 }
 
 window.onload = function() {
-	if (totype[totypeIndex].length) setTimeout(typeText, delayTyping_text);
+	if (wordSet[wordsIndex].length) setTimeout(typeText, 3000);
 }

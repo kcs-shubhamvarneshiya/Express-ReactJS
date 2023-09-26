@@ -7,7 +7,7 @@ function ShowComponent() {
   const fetchPosts = async () => {
     setPosts(await postService.getPosts());
   };
-  console.log(posts);
+
   useEffect(() => {
     fetchPosts();
   }, []);

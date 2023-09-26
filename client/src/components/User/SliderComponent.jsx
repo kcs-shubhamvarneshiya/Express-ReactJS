@@ -15,16 +15,23 @@ export default function SliderComponent() {
 
   return (
     <>
-      <div>
-        <img src="/svg/loginWave.svg" alt="" />
-        <p>SemiWaves</p>
-      </div>
-      
-      <div class="wrapper">
-        <h1 class="effect-wrapper">
-          Packed with <span id="typed"></span>
-          <span class="cursor">&nbsp;</span>
-        </h1>
+      <div className="main-slider-container">
+       <div className="sub-slider-container">
+       <div className="wrapper">
+          <div className="slider-heading">
+            <p>SemiWaves</p>
+          </div>
+          <h1 className="effect-wrapper">
+            Packed with <span id="typed"></span>
+            <span className="cursor">&nbsp;</span>
+          </h1>
+        </div>
+       </div>
+        <div className="sub-slider-container">
+        <div className="wave-png-container">
+          <img src="images/15promax.png" alt="iphone 15" />
+        </div>
+        </div>
       </div>
     </>
   );

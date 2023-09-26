@@ -54,7 +54,7 @@ body {
 }
 
 .nav > .nav-links > a:hover {
-  background-color: #ffa500;
+  background-color: #ffae42;
   color: #ffffff;
 }
 
@@ -172,7 +172,7 @@ body {
   width: 120px;
   border-style: none;
   max-width: 150px;
-  background-color: #ffa500;
+  background-color: #ffae42;
   color: #ffffff;
 }
 
