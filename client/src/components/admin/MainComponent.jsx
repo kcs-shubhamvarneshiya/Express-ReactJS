@@ -7,8 +7,8 @@ export default function IndexComponent() {
         <div>
 
             {/*Navbar container */}
-            <div className='navbar-component'>
-                {<AdminNavbarComponent/>}
+            <div className='admin-navbar-component'>
+               
             </div>
 
             {/*Main Container */}

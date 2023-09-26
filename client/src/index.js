@@ -16,7 +16,7 @@ export default function Index() {
         <Route path="/login" element={<LoginComponent />} />
         <Route path="/show" element={<ShowComponent />} />
         <Route path="/register" element={<RegisterComponent />} />
-       
+        
       </Routes>
     </BrowserRouter>
   );
