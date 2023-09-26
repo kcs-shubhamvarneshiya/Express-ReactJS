@@ -23,8 +23,24 @@ const Product = require("../Database/model/Product");
             return responseHandler(res,response,"Category created successfully !")
         }
     } catch (error) {
-        return errorHandler(res,error.message,500)     
+        return errorHandler(res,error,500)     
     }
   }
 
-  module.exports = {createCategory};
+  const getCategory = async (req,res)=>{
+    try {
+        if(!isAdminValidation(req.user)){
+            return errorHandler(res,"You are not allowed to get category")
+        }
+        const category = await Category.find()
+        if(!category){
+            return errorHandler(res,"Could not fetch category");
+        }else{
+            return responseHandler(res,category,"Category fetched successfully !")
+        }
+    } catch (error) {
+        return errorHandler(res,error,500)
+    }
+  }
+
+  module.exports = {createCategory,getCategory};
