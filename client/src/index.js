@@ -7,6 +7,7 @@ import ShowComponent from "./components/User/ShowComponent";
 import LoginComponent from "./components/User/LoginComponent";
 import { RegisterComponent } from "./components/User/RegisterComponent";
 import AddProductComponent from "./components/admin/AddProductComponent";
+import ProductComponent from "./components/User/ProductComponent";
 
 export default function Index() {
   return (
@@ -17,6 +18,7 @@ export default function Index() {
         <Route path="/show" element={<ShowComponent />} />
         <Route path="/register" element={<RegisterComponent />} />
         <Route path="/add" element={<AddProductComponent/>}/>
+        <Route path="/product" element={<ProductComponent/>}/>
       </Routes>
     </BrowserRouter>
   );

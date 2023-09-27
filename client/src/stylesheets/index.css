@@ -28,7 +28,7 @@ body {
   position: absolute;
   top: 40%;
   transform: translate(0, -50%);
-  color: #000000;
+  color: #111010;
   height: 15vh;
   width: 500px;
   display: flex;
@@ -78,4 +78,41 @@ body {
 .wave-png-container img{
   height: 400px;
   transition: 1s;
+}
+
+/* Heading Components start */
+
+.main-head-container{
+  height: 350px;
+  width: auto;
+  background-color: #ffae42;
+}
+
+.sub-head-container{
+  position: relative;
+  height: 100vh;
+}
+
+.sub-head-container p{
+  font-family: 'Paytone One', sans-serif;
+  font-size: 40px;
+  position: absolute;
+  top: 24%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 800;
+  color: #111010;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.sub-head-container h6{
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  color: #89550b;
+  letter-spacing: 1px;
+  font-weight: 900;
 }
