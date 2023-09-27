@@ -198,13 +198,20 @@ p {
 .admin-nav-header{
   position: absolute;
   top:50%;
-  left:50;
   transform: translate(0%, -50%);
 }
 
-.admin-nav .profile-button-container{
+.profile-button-container{
   position: absolute;
   top:50%;
-  left:50;
+  left:95%;
   transform: translate(0%, -50%);
+}
+.profile-button-container div{
+  cursor: pointer;
+}
+
+.profile-icon{
+  width: 1.5rem;
+  height: 1.625rem;
 }

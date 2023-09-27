@@ -21,7 +21,7 @@ export default function AdminNavbarComponent() {
                 </div>
 
                 <div className='profile-button-container'>
-                    <i className="fa-solid fa-user" onClick={toggleProfileOptions}></i>
+                    <div onClick={toggleProfileOptions}><img className="profile-icon" src='images/profile.png' alt='profile icon'/></div>
                 </div>
             </div>
 
