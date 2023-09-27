@@ -22,9 +22,8 @@ export default function NavbarComponent(props) {
   
   <div className="nav-links">
     <a href="/">Home</a>
-    <a href="/">About Us</a>
-    <a href="/">Contact Us</a>
-    <a href="/">Product</a>
+    <a href="/about">About Us</a>
+    <a href="/product">Product</a>
     <a href="/login">Login</a>
   </div>
 </div>

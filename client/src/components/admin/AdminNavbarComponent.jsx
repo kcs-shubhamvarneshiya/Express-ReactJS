@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import ProfileComponent from './ProfileComponent';
-import '../../stylesheets/index.css'
+import '../../stylesheets/App.css'
 
 export default function AdminNavbarComponent() {
 
