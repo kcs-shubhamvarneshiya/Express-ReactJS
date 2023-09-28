@@ -29,8 +29,7 @@ export default function AdminNavbarComponent() {
             <div className='profile-component'>
                 {isProfileOptionVisible && <ProfileComponent/>}
             </div>
-
-            {/** */}
+            
         </div>
     )
 }

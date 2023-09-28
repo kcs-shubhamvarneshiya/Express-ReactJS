@@ -6,10 +6,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ShowComponent from "./components/User/ShowComponent";
 import LoginComponent from "./components/User/LoginComponent";
 import { RegisterComponent } from "./components/User/RegisterComponent";
-import AddProductComponent from "./components/admin/AddProductComponent";
 import ProductComponent from "./components/User/ProductComponent";
 import AboutComponent from "./components/User/AboutComponent";
-import AdminNavbarComponent from "./components/admin/AdminNavbarComponent";
+import MainComponent from "./components/admin/MainComponent";
 
 export default function Index() {
   return (
@@ -19,7 +18,7 @@ export default function Index() {
         <Route path="/login" element={<LoginComponent />} />
         <Route path="/show" element={<ShowComponent />} />
         <Route path="/register" element={<RegisterComponent />} />
-        <Route path="/add" element={<AdminNavbarComponent/>}/>
+        <Route path="/admin" element={<MainComponent/>}/>
         <Route path="/product" element={<ProductComponent/>}/>
         <Route path="/about" element={<AboutComponent/>}/>
       </Routes>
