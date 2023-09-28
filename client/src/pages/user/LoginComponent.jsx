@@ -9,39 +9,42 @@ import "../../stylesheets/App.css";
 const AUTO_HIDE_DURATION = 2000;
 
 export default function LoginComponent() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
   const [icon, setIcon] = useState("fa-regular fa-eye-slash");
   const [type, setType] = useState("password");
   const [resType, setResType] = useState("error");
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSnackbar = (message, type = "error") => {
+    setMessage(message);
+    setResType(type);
+    setOpen(true);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const formData = new FormData();
-      formData.append("email", email);
-      formData.append("password", password);
-
       const result = await userService.login(formData);
-      setResType("success");
-      setMessage(result.data.Message);
-      setOpen(true);
+      handleSnackbar(result.data.Message, "success");
     } catch (error) {
-      setResType("error");
       const err = isAxiosError(error);
       if (err) {
         if (error.message === "Network Error") {
-          setMessage("Server is not responding");
-          setOpen(true);
+          handleSnackbar("Server is not responding");
         } else {
-          setMessage(String(error?.response?.data?.msg));
-          setOpen(true);
+          handleSnackbar(String(error?.response?.data?.msg));
         }
-        setMessage(String(error?.message));
-        setOpen(true);
       }
     }
   };
@@ -53,7 +56,7 @@ export default function LoginComponent() {
     setOpen(false);
   };
 
-  const pswToggle = () => {
+  const togglePasswordVisibility = () => {
     if (type === "password") {
       setIcon("fa-regular fa-eye");
       setType("text");
@@ -80,8 +83,9 @@ export default function LoginComponent() {
                     <input
                       type="text"
                       placeholder="Enter Email"
-                      name="uname"
-                      onChange={(event) => setEmail(event.target.value)}
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       required
                     />
                   </div>
@@ -92,13 +96,14 @@ export default function LoginComponent() {
                     <input
                       type={type}
                       placeholder="Enter Password"
-                      name="psw"
-                      onChange={(event) => setPassword(event.target.value)}
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
                       required
                     />
                   </div>
                   <div className="password-toggle">
-                    <span onClick={pswToggle}>
+                    <span onClick={togglePasswordVisibility}>
                       <i className={icon}></i>
                     </span>
                   </div>
