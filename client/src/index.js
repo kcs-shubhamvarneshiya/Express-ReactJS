@@ -1,14 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ShowComponent from "./components/User/ShowComponent";
-import LoginComponent from "./components/User/LoginComponent";
-import { RegisterComponent } from "./components/User/RegisterComponent";
-import ProductComponent from "./components/User/ProductComponent";
-import AboutComponent from "./components/User/AboutComponent";
-import MainComponent from "./components/admin/MainComponent";
+import LoginComponent from "./pages/user/LoginComponent";
+import { RegisterComponent } from "./pages/user/RegisterComponent";
+import ProductComponent from "./pages/user/ProductComponent";
+import AboutComponent from "./pages/user/AboutComponent";
+import MainComponent from "./pages/admin/MainComponent";
 
 export default function Index() {
   return (
@@ -33,4 +32,4 @@ root.render(
   </React.StrictMode>
 );
 
-reportWebVitals();
+

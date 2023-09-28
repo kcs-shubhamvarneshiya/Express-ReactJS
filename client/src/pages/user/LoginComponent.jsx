@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NavbarComponent from "./NavbarComponent";
+import NavbarComponent from "../../components/User/NavbarComponent";
 import userService from "../../services/userService";
 import { isAxiosError } from "axios";
 import Snackbar from "@mui/material/Snackbar";
@@ -30,10 +30,17 @@ export default function LoginComponent() {
       setMessage(result.data.Message);
       setOpen(true);
     } catch (error) {
+      setResType("error");
       const err = isAxiosError(error);
       if (err) {
-        setResType("error");
-        setMessage(String(error?.response?.data?.msg));
+        if (error.message === "Network Error") {
+          setMessage("Server is not responding");
+          setOpen(true);
+        } else {
+          setMessage(String(error?.response?.data?.msg));
+          setOpen(true);
+        }
+        setMessage(String(error?.message));
         setOpen(true);
       }
     }

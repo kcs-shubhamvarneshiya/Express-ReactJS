@@ -1,6 +1,6 @@
 import React from "react";
-import AdminNavbarComponent from "./AdminNavbarComponent";
-import SideBarComponent from "./SideBarComponent";
+import AdminNavbarComponent from "../../components/admin/AdminNavbarComponent";
+import SideBarComponent from "../../components/admin/SideBarComponent";
 
 export default function MainComponent() {
   return (
