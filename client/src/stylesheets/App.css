@@ -200,7 +200,12 @@ p {
 .admin-nav-header{
   position: absolute;
   top:50%;
-  transform: translate(0%, -50%);
+  transform: translate(0%, -40%);
+}
+
+.admin-nav-title span{
+ position: absolute;
+ transform: translate(0%,0%);
 }
 
 .profile-button-container{
