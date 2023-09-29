@@ -5,14 +5,17 @@ import "../../stylesheets/sideNav.css";
 
 export default function SideBarComponent() {
 
-const [toggle,setToggle] = useState("false"); 
+const [toggle,setToggle] = useState(false);
 
 const toggleChange =()=>{
-  
+  if(toggle === false){
+    setToggle(true)
+  }
+  else{setToggle(false)}
 }
 
   return (
-    <div className="Sidebar">
+    <div className={toggle ? "Sidebar" : "sortSidebar"}>
       <ul className="SidebarList">
         <div className="nav-left-side">
           <div className=""><i onClick={toggleChange}><MenuOpenIcon/></i></div>
@@ -26,11 +29,11 @@ const toggleChange =()=>{
               id={window.location.pathname === val.link ? "active" : ""}
             >
               <div id="icon">{val.icon}</div>
-              <div id="title">{val.title}</div>
+              {toggle ? <div id="title">{val.title}</div> : <div></div>} 
             </li>
           );
         })}
       </ul>
-      </div>
+    </div>
   );
 }

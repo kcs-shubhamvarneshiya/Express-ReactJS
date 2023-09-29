@@ -11,6 +11,14 @@ body {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
+.sortSidebar{
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 100%;
+    width : 50px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
 .SidebarList {
     height: auto;
     width: 100%;
@@ -29,6 +37,7 @@ body {
     align-items: center;
 }
 
+
 .row div{
     font-weight: 700;
     cursor: pointer;
@@ -42,14 +51,14 @@ body {
 .row #icon {
     flex: 40%;
     display: grid;
-    place-items: center;
+    place-items: flex-end;
 }
 
 .row #title {
     display: grid;
     font-size:14px;
     flex: 60%;
-    place-items:left;
+    place-items:normal;
 }
 
 .SidebarList .nav-left-side{
