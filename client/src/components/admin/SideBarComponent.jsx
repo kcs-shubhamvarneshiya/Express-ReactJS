@@ -1,4 +1,5 @@
 import React from "react";
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import "../../stylesheets/sideNav.css";
 import { sidebarData } from "../Data/sidebarData";
 
@@ -6,6 +7,7 @@ export default function SideBarComponent() {
   return (
     <div className="Sidebar">
       <ul className="SidebarList">
+        <li className="nav-left-side"><MenuOpenIcon/></li>
         {sidebarData.map((val, key) => {
           return (
             <li
