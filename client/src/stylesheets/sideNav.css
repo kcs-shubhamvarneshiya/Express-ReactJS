@@ -37,14 +37,18 @@ body {
     align-items: center;
 }
 
+li:hover{
+    background-color: #4b4276;
+    color: #FFFFFF;
+}
 
 .row div{
     font-weight: 700;
     cursor: pointer;
 }
 
-.SidebarList .row #active{
-    background-color: black;
+.SidebarList #active{
+    background-color: #a59dd0;
     color: #FFFFFF;
 }
 

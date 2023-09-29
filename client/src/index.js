@@ -8,6 +8,7 @@ import { RegisterComponent } from "./pages/user/RegisterComponent";
 import ProductComponent from "./pages/user/ProductComponent";
 import AboutComponent from "./pages/user/AboutComponent";
 import MainComponent from "./pages/admin/MainComponent";
+import CategoryComponent from "./pages/admin/CategoryComponent";
 
 export default function Index() {
   return (
@@ -20,6 +21,7 @@ export default function Index() {
         <Route path="/admin" element={<MainComponent/>}/>
         <Route path="/product" element={<ProductComponent/>}/>
         <Route path="/about" element={<AboutComponent/>}/>
+        <Route path="/category" element={<CategoryComponent/>}/>
       </Routes>
     </BrowserRouter>
   );
