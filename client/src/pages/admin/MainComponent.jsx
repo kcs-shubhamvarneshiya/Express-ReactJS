@@ -1,7 +1,6 @@
 import React from "react";
 import AdminNavbarComponent from "../../components/admin/AdminNavbarComponent";
 import SideBarComponent from "../../components/admin/SideBarComponent";
-import '../../stylesheets/sideNav.css'
 
 export default function MainComponent() {
   return (

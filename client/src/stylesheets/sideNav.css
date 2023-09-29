@@ -1,14 +1,11 @@
-.admin-slider-navbar {
-    width: 100vw;
-    height: 100vw;
-}
-
 body {
     margin: 0;
     padding: 0;
 }
 
 .Sidebar {
+    margin-top: 10px;
+    margin-left: 10px;
     height: 100%;
     width: 200px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -32,9 +29,9 @@ body {
     align-items: center;
 }
 
-.row :hover{
+.row div{
+    font-weight: 700;
     cursor: pointer;
-    background-color:#ffae42;
 }
 
 .SidebarList .row #active{
@@ -43,13 +40,27 @@ body {
 }
 
 .row #icon {
-    font-size: 15px;
-    flex: 30%;
+    flex: 40%;
     display: grid;
     place-items: center;
 }
 
 .row #title {
-    font-weight: 500;
-    flex: 70%;
+    display: grid;
+    font-size:14px;
+    flex: 60%;
+    place-items:left;
+}
+
+.SidebarList .nav-left-side{
+    cursor: pointer;
+    background-color: #4b4276;
+    color: #FFFFFF;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.nav-left-side i{
+    text-align: right;
+    display: block;
 }

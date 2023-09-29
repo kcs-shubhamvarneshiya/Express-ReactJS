@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Quicksand:wght@500;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Quicksand:wght@400;500&family=Rubik:wght@600&display=swap");
-
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 * {
   box-sizing: border-box;
 }
@@ -192,7 +192,9 @@ p {
   position: relative;
   flex-direction: row;
   padding: 10px;
-  background-color: #ffae42;
+  background-color: #4b4276;
+  color: #ffffff;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .admin-nav-header{
@@ -209,9 +211,11 @@ p {
 }
 .profile-button-container div{
   cursor: pointer;
+  color: #ffffff;
 }
 
 .profile-icon{
+  color: #ffffff; 
   width: 1.5rem;
   height: 1.625rem;
 }

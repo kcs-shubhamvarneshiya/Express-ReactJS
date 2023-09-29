@@ -1,16 +1,18 @@
 import React from 'react'
 import '../../stylesheets/ProfileButton.css';
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
+import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 
 export default function ProfileComponent() {
     return (
         <div className="profile-options-container">
-            <div className="manage-account-container ">
-                <img className="profile-options-icon" src="images/manageAcc.png" alt="manage-account-icon"/>
+            <div className="manage-account-container">
+                <i className='profile-options-icon'><ManageAccountsOutlinedIcon/></i>
                 <p className="option" ><a href='/'>Manage Account</a></p>
             </div>
             <div className="signOut-container">
-                <img className="profile-options-icon" src="images/signout.png" alt="signOut-icon"/>
-                <p className="option"><a href='/'>Sign out</a></p>
+            <i className='profile-options-icon'><ExitToAppOutlinedIcon/></i>
+            <p className="option"><a href='/'>Sign out</a></p>
             </div>
         </div>
     )

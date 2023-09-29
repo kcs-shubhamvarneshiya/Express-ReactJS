@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import ProfileComponent from './ProfileComponent';
+import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined';
 import '../../stylesheets/App.css'
 
 export default function AdminNavbarComponent() {
@@ -21,7 +22,7 @@ export default function AdminNavbarComponent() {
                 </div>
 
                 <div className='profile-button-container'>
-                    <div onClick={toggleProfileOptions}><img className="profile-icon" src='images/profile.png' alt='profile icon'/></div>
+                    <div onClick={toggleProfileOptions}><i className="profile-icon"><AssignmentIndOutlinedIcon/></i></div>
                 </div>
             </div>
 
