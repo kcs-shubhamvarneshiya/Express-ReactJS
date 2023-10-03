@@ -40,7 +40,7 @@ export default function LoginComponent() {
       const result = await userService.login(formData);
       localStorage.setItem("token",JSON.stringify(result.data.Data.token));
       localStorage.setItem("_id",JSON.stringify(result.data.Data._id));
-      localStorage.setItem("name",JSON.stringify(result.data.Data.name));
+      localStorage.setItem("name",result.data.Data.name);
       localStorage.setItem("role",JSON.stringify(result.data.Data.role));
       handleSnackbar(result.data.Message, "success");
       navigate("/");

@@ -45,17 +45,23 @@ body {
   font-size: 15px;
 }
 
-.nav > .nav-links > a {
+.nav > .nav-links > a,small {
   font-weight: 600;
   display: inline-block;
+  font-size: 15px;
   padding: 13px 10px 13px 10px;
   text-decoration: none;
   color: #000000;
+  transition-duration: 1s;
 }
 
 .nav > .nav-links > a:hover {
   background-color: #ffae42;
   color: #ffffff;
+}
+
+.nav > .nav-links > small :hover{
+  cursor: pointer;
 }
 
 .nav > #nav-check {
