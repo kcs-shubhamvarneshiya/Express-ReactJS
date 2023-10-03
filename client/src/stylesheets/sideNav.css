@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.Sidebar {
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 100%;
+    width: 200px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.sortSidebar{
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 100%;
+    width : 50px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.SidebarList {
+    height: auto;
+    width: 100%;
+    padding: 0;
+}
+
+.SidebarList .row {
+    width: 100%;
+    height: 50px;
+    list-style-type: none;
+    margin: 0%;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+li:hover{
+    background-color: #4b4276;
+    color: #FFFFFF;
+}
+
+.row div{
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.SidebarList #active{
+    background-color: #a59dd0;
+    color: #FFFFFF;
+}
+
+.row #icon {
+    flex: 40%;
+    display: grid;
+    place-items: flex-end;
+}
+
+.row #title {
+    display: grid;
+    font-size:14px;
+    flex: 60%;
+    place-items:normal;
+}
+
+.SidebarList .nav-left-side{
+    cursor: pointer;
+    background-color: #4b4276;
+    color: #FFFFFF;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.nav-left-side i{
+    text-align: right;
+    display: block;
+}

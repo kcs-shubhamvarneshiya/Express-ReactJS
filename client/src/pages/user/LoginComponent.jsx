@@ -1,40 +1,57 @@
 import React, { useState } from "react";
-import NavbarComponent from "./NavbarComponent";
+import NavbarComponent from "../../components/User/NavbarComponent";
 import userService from "../../services/userService";
 import { isAxiosError } from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import "../../stylesheets/App.css";
+import {useNavigate} from "react-router-dom"
 
-const AUTO_HIDE_DURATION = 2000;
+const AUTO_HIDE_DURATION = 3000;
 
 export default function LoginComponent() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
   const [icon, setIcon] = useState("fa-regular fa-eye-slash");
   const [type, setType] = useState("password");
   const [resType, setResType] = useState("error");
+  const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSnackbar = (message, type = "error") => {
+    setMessage(message);
+    setResType(type);
+    setOpen(true);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const formData = new FormData();
-      formData.append("email", email);
-      formData.append("password", password);
-
       const result = await userService.login(formData);
-      setResType("success");
-      setMessage(result.data.Message);
-      setOpen(true);
+      localStorage.setItem("token",JSON.stringify(result.data.Data.token));
+      localStorage.setItem("_id",JSON.stringify(result.data.Data._id));
+      localStorage.setItem("name",JSON.stringify(result.data.Data.name));
+      localStorage.setItem("role",JSON.stringify(result.data.Data.role));
+      handleSnackbar(result.data.Message, "success");
+      navigate("/");
     } catch (error) {
       const err = isAxiosError(error);
       if (err) {
-        setResType("error");
-        setMessage(String(error?.response?.data?.msg));
-        setOpen(true);
+        if (error.message === "Network Error") {
+          handleSnackbar("Server is not responding");
+        } else {
+          handleSnackbar(String(error?.response?.data?.msg));
+        }
       }
     }
   };
@@ -46,7 +63,7 @@ export default function LoginComponent() {
     setOpen(false);
   };
 
-  const pswToggle = () => {
+  const togglePasswordVisibility = () => {
     if (type === "password") {
       setIcon("fa-regular fa-eye");
       setType("text");
@@ -73,8 +90,9 @@ export default function LoginComponent() {
                     <input
                       type="text"
                       placeholder="Enter Email"
-                      name="uname"
-                      onChange={(event) => setEmail(event.target.value)}
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       required
                     />
                   </div>
@@ -85,13 +103,14 @@ export default function LoginComponent() {
                     <input
                       type={type}
                       placeholder="Enter Password"
-                      name="psw"
-                      onChange={(event) => setPassword(event.target.value)}
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
                       required
                     />
                   </div>
                   <div className="password-toggle">
-                    <span onClick={pswToggle}>
+                    <span onClick={togglePasswordVisibility}>
                       <i className={icon}></i>
                     </span>
                   </div>

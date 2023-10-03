@@ -1,6 +1,6 @@
 import React from 'react'
-import NavbarComponent from './NavbarComponent'
-import HeadingComponent from './HeadingComponent'
+import NavbarComponent from '../../components/User/NavbarComponent'
+import HeadingComponent from '../../components/User/HeadingComponent'
 
 export default function ProductComponent() {
     return (

@@ -1,5 +1,5 @@
 import React ,{ useState } from "react";
-import NavbarComponent from "./NavbarComponent"
+import NavbarComponent from "../../components/User/NavbarComponent"
 
 export function RegisterComponent() {
 
