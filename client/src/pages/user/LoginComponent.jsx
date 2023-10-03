@@ -5,8 +5,9 @@ import { isAxiosError } from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import "../../stylesheets/App.css";
+import {useNavigate} from "react-router-dom"
 
-const AUTO_HIDE_DURATION = 2000;
+const AUTO_HIDE_DURATION = 3000;
 
 export default function LoginComponent() {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ export default function LoginComponent() {
   const [icon, setIcon] = useState("fa-regular fa-eye-slash");
   const [type, setType] = useState("password");
   const [resType, setResType] = useState("error");
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -36,7 +38,12 @@ export default function LoginComponent() {
 
     try {
       const result = await userService.login(formData);
+      localStorage.setItem("token",JSON.stringify(result.data.Data.token));
+      localStorage.setItem("_id",JSON.stringify(result.data.Data._id));
+      localStorage.setItem("name",JSON.stringify(result.data.Data.name));
+      localStorage.setItem("role",JSON.stringify(result.data.Data.role));
       handleSnackbar(result.data.Message, "success");
+      navigate("/");
     } catch (error) {
       const err = isAxiosError(error);
       if (err) {
