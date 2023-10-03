@@ -17,9 +17,8 @@ export default function LoginComponent() {
 
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
-  const [icon, setIcon] = useState("fa-regular fa-eye-slash");
   const [type, setType] = useState("password");
-  const [resType, setResType] = useState("error");
+  const [icon, setIcon] = useState("fa-regular fa-eye-slash");
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -29,8 +28,8 @@ export default function LoginComponent() {
 
   const handleSnackbar = (message, type = "error") => {
     setMessage(message);
-    setResType(type);
     setOpen(true);
+    setType(type);
   };
 
   const handleSubmit = async (event) => {
@@ -38,10 +37,10 @@ export default function LoginComponent() {
 
     try {
       const result = await userService.login(formData);
-      localStorage.setItem("token",JSON.stringify(result.data.Data.token));
-      localStorage.setItem("_id",JSON.stringify(result.data.Data._id));
-      localStorage.setItem("name",result.data.Data.name);
-      localStorage.setItem("role",JSON.stringify(result.data.Data.role));
+      localStorage.setItem("token", JSON.stringify(result.data.Data.token));
+      localStorage.setItem("_id", JSON.stringify(result.data.Data._id));
+      localStorage.setItem("name", result.data.Data.name);
+      localStorage.setItem("role", JSON.stringify(result.data.Data.role));
       handleSnackbar(result.data.Message, "success");
       navigate("/");
     } catch (error) {
@@ -56,21 +55,16 @@ export default function LoginComponent() {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setType(type === "password" ? "text" : "password");
+    setIcon(type === "password" ? "fa-regular fa-eye" : "fa-regular fa-eye-slash")
+  };
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
     setOpen(false);
-  };
-
-  const togglePasswordVisibility = () => {
-    if (type === "password") {
-      setIcon("fa-regular fa-eye");
-      setType("text");
-    } else {
-      setIcon("fa-regular fa-eye-slash");
-      setType("password");
-    }
   };
 
   return (
@@ -140,7 +134,7 @@ export default function LoginComponent() {
             elevation={6}
             variant="filled"
             onClose={handleClose}
-            severity={resType}
+            severity="error"
           >
             {message}
           </MuiAlert>
