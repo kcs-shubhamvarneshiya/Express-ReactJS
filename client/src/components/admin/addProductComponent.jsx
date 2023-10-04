@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import AdminNavbarComponent from "../admin/AdminNavbarComponent";
-import categoryService from "../../services/categoryService";
+import AdminNavbarComponent from "./AdminNavbarComponent";
+import categoryService from "../../services/category-service";
 import { isAxiosError } from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import productService from "../../services/product-service";
 
 export default function AddProductComponent() {
   const [productName, setProductName] = useState("");
   const [productVarient, setProductVarient] = useState("");
-  const [productColor, setProductColor] = useState("");
+  const [productPrice, setProductPrice] = useState("");
   const [productCamera, setProductCamera] = useState("");
+  const [ProductColor, setProductColor] = useState("");
   const [productProcessor, setProductProcessor] = useState("");
   const [productScreen, setProductScreen] = useState("");
   const [productFrontImage, setProductFrontImage] = useState("");
@@ -39,21 +41,28 @@ export default function AddProductComponent() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      
-      const formData = new FormData();
-      formData.append("")
-      formData.append("")
-      formData.append("")
-      formData.append("")
-      formData.append("")
-      formData.append("")
 
+      const formData = new FormData();
+      formData.append("productName", productName);
+      formData.append("Front_Image", productFrontImage);
+      formData.append("Back_Image", productBackImage);
+      formData.append("Side_Image", productSideImage);
+      formData.append("Varient", productVarient);
+      formData.append("Camera", productCamera);
+      formData.append("Processor", productProcessor);
+      formData.append("Screen", productScreen);
+      formData.append("productPrice", productPrice);
+      formData.append("productColor", ProductColor);
+      formData.append("categoryId", category);
+
+      const result = await productService.insertProduct(formData);
+      console.log(result);
 
     } catch (error) {
-      if(isAxiosError(error)){
+      if (isAxiosError(error)) {
         setResType("error");
-        setResp(error.response.data.msg)
-        setOpen(true)
+        setResp(error.response.data.msg);
+        setOpen(true);
       }
     }
   };
@@ -82,7 +91,6 @@ export default function AddProductComponent() {
               }}
               required
             />
-            
           </div>
 
           <div className="">
@@ -101,6 +109,16 @@ export default function AddProductComponent() {
               name="productColor"
               onChange={(event) => {
                 setProductColor(event.target.value);
+              }}
+            />
+          </div>
+
+          <div className="">
+            <input
+              type="text"
+              name="productPrice"
+              onChange={(event) => {
+                setProductPrice(event.target.value);
               }}
             />
           </div>
@@ -176,7 +194,7 @@ export default function AddProductComponent() {
 
           <button>submit</button>
         </form>
-        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
           <MuiAlert
             elevation={6}
             variant="filled"

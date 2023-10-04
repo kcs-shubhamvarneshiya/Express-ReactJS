@@ -6,8 +6,7 @@ export default function AboutComponent() {
     return (
         <div>
             <NavbarComponent/>
-            <HeadingComponent heading={"About Us"}/>
-            
+            <HeadingComponent heading={"About Us"}/>  
         </div>
     )
 }
