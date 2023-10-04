@@ -1,39 +1,25 @@
 const Product = require("../Database/model/Product");
 const Category = require("../Database/model/Category");
-const {
-  errorHandler,
-  responseHandler,
-  isAdminValidation,
-} = require("../Helper/handler");
+const { errorHandler, responseHandler, isAdminValidation } = require("../Helper/handler");
 
 const createProduct = async (req, res) => {
   try {
     // Check if the user is an admin
     if (!isAdminValidation(req.user)) {
-      return errorHandler(res, "You are not allowed to create a new post", 401);
+      return errorHandler(res, "You are not allowed to create a new product", 401);
     }
 
-    // Destructure request body
-    const {
-      product_name,
-      product_varient,
-      product_camera,
-      product_processor,
-      product_screen,
-      product_price,
-      categoryId,
-    } = req.body;
+    // Validate and sanitize request data
+    // Implement file upload handling and validation here
 
-    // Destructure uploaded files
-    const { product_front_img, product_side_img, product_back_img } = req.files;
+    const { product_name, product_varient, product_camera, product_processor, product_screen, product_price, categoryId } = req.body;
 
-    // Create a product object
-    const product = new Product({
+    const productData = {
       productName: product_name,
       productImage: {
-        Front_Image: product_front_img[0].originalname,
-        Back_Image: product_back_img[0].originalname,
-        Side_Image: product_side_img[0].originalname,
+        Front_Image: req.files.product_front_img[0].originalname,
+        Back_Image: req.files.product_back_img[0].originalname,
+        Side_Image: req.files.product_side_img[0].originalname,
       },
       productDes: {
         Varient: product_varient,
@@ -43,10 +29,12 @@ const createProduct = async (req, res) => {
       },
       productPrice: product_price,
       categoryId: categoryId,
-    });
+    };
 
-    // Save the product and update the category
+    const product = new Product(productData);
     const savedProduct = await product.save();
+
+    // Update the category with the new product
     const category = await Category.findById(savedProduct.categoryId);
     category.products.push(savedProduct);
     await category.save();
