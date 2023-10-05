@@ -1,15 +1,26 @@
-import axios from "axios";
+import axios,{ isAxiosError } from "axios";
 
-var token = localStorage.getItem("token");
-token = token.replaceAll('"','');
-// Create a reusable Axios instance with default headers
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000/api/',
   headers: {
-    'Authorization': `Bearer ${token}`, 
+    'Authorization': `Bearer ${localStorage.getItem("user").token}`, 
     'Content-Type': 'application/json',
   },
 });
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {axiosInstance};
+const errorHandler = (error)=>{
+    if (isAxiosError(error)) {
+        if (error.message === "Network Error") {
+          return "Server is not responding";
+        }
+        if(error.response.statusText ==="Internal Server Error")
+        {
+            localStorage.removeItem("user");
+            return "SessionExpired";
+        }
+        return String(error.response?.data?.msg) || "An error occurred";
+      }
+      return "An error occurred";
+}
+
+export default {errorHandler,axiosInstance}

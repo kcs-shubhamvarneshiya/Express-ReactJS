@@ -5,6 +5,8 @@ import { isAxiosError } from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import productService from "../../services/product-service";
+import handler from "../../helper/handler"
+import { useNavigate } from "react-router-dom";
 
 export default function AddProductComponent() {
   const [productName, setProductName] = useState("");
@@ -22,14 +24,20 @@ export default function AddProductComponent() {
   const [data, setData] = useState("");
   const [resType, setResType] = useState("error");
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const fetchCategory = async () => {
     try {
       const res = await categoryService.getCategory();
       setData(res.Data);
     } catch (error) {
+      console.log(error);
+      const err = handler.errorHandler(error)  
+      if(err === "SessionExpired"){
+        navigate("/login");
+      }
       setResType("error");
-      setResp(error.response.data.msg);
+      setResp(err);
       setOpen(true);
     }
   };
@@ -75,7 +83,9 @@ export default function AddProductComponent() {
     setOpen(false);
   };
 
-  const onSelectHandler = () => {};
+  const onSelectHandler = (event) => {
+    console.log("values : ",event.target.value)
+  };
 
   return (
     <>
@@ -183,14 +193,14 @@ export default function AddProductComponent() {
             />
           </div>
 
-          <div>
+          {/* <div>
             <select onChange={onSelectHandler}>
               <option>Please Select one category</option>
               {data.map((data) => (
                 <option key={data._id}>{data.categoryName}</option>
               ))}
             </select>
-          </div>
+          </div> */}
 
           <button>submit</button>
         </form>

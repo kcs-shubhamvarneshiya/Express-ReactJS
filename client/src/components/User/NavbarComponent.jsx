@@ -9,9 +9,7 @@ export default function NavbarComponent(props) {
   const [isProfileOptionVisible, setIsProfileOptionVisible] = useState(false);
 
   useEffect(() => {
-    var data = localStorage.getItem("name");
-    data = data.replaceAll('"', "");
-    setData(data);
+    
   }, []);
 
   const toggleProfileOptions = ()=>{
@@ -41,15 +39,16 @@ export default function NavbarComponent(props) {
         <a href="/">Home</a>
         <a href="/about">About Us</a>
         <a href="/product">Product</a>
-
-        {data ? (
-          <small onClick={toggleProfileOptions}>{data}</small>
-        ) : (
+        <a href="/login">Login</a>
+        {/* {!localStorage.getItem("name") ? (
           <>
-            <a href="/login">Login</a>
-            <a href="/login">Registration</a>
-          </>
-        )}
+          <a href="/login">Login</a>
+          <a href="/login">Registration</a>
+        </>
+          
+        ) : (
+          <small onClick={toggleProfileOptions}>{data}</small>
+        )} */}
       </div>
 
       <div className="profile-component">

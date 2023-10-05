@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import NavbarComponent from "../../components/User/NavbarComponent";
 import userService from "../../services/userService";
-import { isAxiosError } from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import "../../stylesheets/App.css";
-import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom";
+import handler from "../../helper/handler"
 
 const AUTO_HIDE_DURATION = 3000;
 
 export default function LoginComponent() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
+  const [formData, setFormData] = useState({ email: "",password: "",});
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
   const [type, setType] = useState("password");
@@ -37,21 +33,19 @@ export default function LoginComponent() {
 
     try {
       const result = await userService.login(formData);
-      localStorage.setItem("token", JSON.stringify(result.data.Data.token));
-      localStorage.setItem("_id", JSON.stringify(result.data.Data._id));
-      localStorage.setItem("name", result.data.Data.name);
-      localStorage.setItem("role", JSON.stringify(result.data.Data.role));
+      console.log(result.data.Data)
+      console.log(typeof(result.data.Data))
+      const user = {
+        token : result.data.Data.token,
+        _id : result.data.Data._id,
+        name : result.data.Data.name
+      }
+      localStorage.setItem("user", user);
       handleSnackbar(result.data.Message, "success");
       navigate("/");
     } catch (error) {
-      const err = isAxiosError(error);
-      if (err) {
-        if (error.message === "Network Error") {
-          handleSnackbar("Server is not responding");
-        } else {
-          handleSnackbar(String(error?.response?.data?.msg));
-        }
-      }
+      const err = handler.errorHandler(error)
+      handleSnackbar(err)
     }
   };
 
