@@ -5,7 +5,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import "../../stylesheets/App.css";
 import {useNavigate} from "react-router-dom";
-import handler from "../../helper/handler"
+import {errorHandler} from "../../helper/handler"
 
 const AUTO_HIDE_DURATION = 3000;
 
@@ -33,8 +33,6 @@ export default function LoginComponent() {
 
     try {
       const result = await userService.login(formData);
-      console.log(result.data.Data)
-      console.log(typeof(result.data.Data))
       const user = {
         token : result.data.Data.token,
         _id : result.data.Data._id,
@@ -44,7 +42,7 @@ export default function LoginComponent() {
       handleSnackbar(result.data.Message, "success");
       navigate("/");
     } catch (error) {
-      const err = handler.errorHandler(error)
+      const err = errorHandler(error)
       handleSnackbar(err)
     }
   };

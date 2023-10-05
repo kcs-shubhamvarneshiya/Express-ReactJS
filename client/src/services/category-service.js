@@ -1,7 +1,7 @@
-import handler from '../helper/handler';
+import {axiosInstance} from '../helper/handler';
 
 const getCategory = async() => {
-  return handler.axiosInstance.get('category/get-category')
+  return axiosInstance.get('category/get-category')
     .then(response => response.data)
     .catch(error => {
       throw error;
