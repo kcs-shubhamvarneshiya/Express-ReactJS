@@ -5,7 +5,7 @@ import { isAxiosError } from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import productService from "../../services/product-service";
-import handler from "../../helper/handler"
+import {errorHandler} from "../../helper/handler"
 import { useNavigate } from "react-router-dom";
 
 export default function AddProductComponent() {
@@ -29,13 +29,11 @@ export default function AddProductComponent() {
   const fetchCategory = async () => {
     try {
       const res = await categoryService.getCategory();
+      console.log(res)
       setData(res.Data);
     } catch (error) {
-      console.log(error);
-      const err = handler.errorHandler(error)  
-      if(err === "SessionExpired"){
-        navigate("/login");
-      }
+      console.log(error)
+      const err = errorHandler(error)  
       setResType("error");
       setResp(err);
       setOpen(true);
