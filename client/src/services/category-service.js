@@ -1,13 +1,18 @@
-import handler from '../helper/handler';
+import {axiosInstance} from '../helper/handler';
 
 const getCategory = async() => {
-  return handler.axiosInstance.get('category/get-category')
+  return axiosInstance.get('category/get-category')
     .then(response => response.data)
     .catch(error => {
-      // Handle errors globally or throw the error to be handled elsewhere
       throw error;
     });
 };
 
+const insertCategory = async()=>{
+  return axiosInstance.post('category/post-category')
+  .then(response => response.data)
+  .catch(error =>{ throw error; });
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default {getCategory};
+export default {getCategory,insertCategory};

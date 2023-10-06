@@ -1,7 +1,7 @@
-import handler from "../helper/handler"
+import {axiosInstance} from "../helper/handler"
 
 const insertProduct = async()=>{
-    return handler.axiosInstance.post('product/create-product')
+    return axiosInstance.post('product/create-product')
     .then(response => response.data)
     .catch(error => {throw error})
 }
