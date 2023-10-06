@@ -24,15 +24,12 @@ export default function AddProductComponent() {
   const [data, setData] = useState("");
   const [resType, setResType] = useState("error");
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
 
   const fetchCategory = async () => {
     try {
       const res = await categoryService.getCategory();
-      console.log(res)
       setData(res.Data);
     } catch (error) {
-      console.log(error)
       const err = errorHandler(error)  
       setResType("error");
       setResp(err);
