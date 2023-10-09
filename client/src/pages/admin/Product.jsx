@@ -6,8 +6,8 @@ import AddProductComponent from '../../components/admin/AddProductComponent'
 export default function Product() {
     return (
         <div>
-            <AdminNavbarComponent/>
-            <SideBarComponent/>
+            {/* <AdminNavbarComponent/>
+            <SideBarComponent/> */}
             <div className=''>
               <AddProductComponent/>  
             </div>
