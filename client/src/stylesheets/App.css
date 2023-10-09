@@ -241,7 +241,7 @@ p {
   flex-direction: row;
 }
 
-.insert-product .product-form{
+.insert-product .product-main-form{
   display: inline-flex;
   margin: 5px;
   justify-content: center;
