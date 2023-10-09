@@ -231,4 +231,25 @@ p {
   height: 1.625rem;
 }
 
-/* Admin Side Bar*/
+/* Add Product */
+
+.insert-product{
+  margin: 5px;
+  padding: 10px;
+  margin-left: 80px;
+  display: flex;
+  flex-direction: row;
+}
+
+.insert-product .product-main-form{
+  display: inline-flex;
+  margin: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-input{
+  
+}
+
+
