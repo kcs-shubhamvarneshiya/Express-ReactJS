@@ -234,22 +234,59 @@ p {
 /* Add Product */
 
 .insert-product{
-  margin: 5px;
+  margin: 10px;
   padding: 10px;
-  margin-left: 80px;
+}
+
+.insert-product .product-container{
   display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: center;
   flex-direction: row;
 }
 
-.insert-product .product-main-form{
+.product-container .product-main-form{
   display: inline-flex;
-  margin: 5px;
-  justify-content: center;
-  align-items: center;
+  margin: 10px;
 }
 
-.form-input{
-  
+.form-field-section{
+  margin: 0%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-heading p{
+  margin: 0px;
+  padding: 0px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.form-input input,select{
+  height: 40px;
+  width: 200px;
+  border-style: none;
+  border-bottom: 2px solid #ffae42;
+}
+
+.form-input input[type="file"]{
+
+}
+
+.form-submit{
+  display: flex;
+  justify-content: center;
+}
+
+.form-submit button{
+  width: 100px;
+  padding: 5px;
+  background-color: #ffae42;
+  color: #fff;
+  border-style: none;
 }
 
 
