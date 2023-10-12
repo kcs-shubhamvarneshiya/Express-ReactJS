@@ -1,17 +1,16 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import React,{Outlet,useEffect} from 'react';
+import { useNavigate } from "react-router-dom";
 
-export default function PrivateRoute({
-  component: Component,
-  isAuthenticated,
-  ...rest
-}) {
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/login" />
-      }
-    />
-  );
+export default function PrivateRoute() {
+    
+    const navigate = useNavigate();
+    const user= localStorage.getItem("user");
+
+    useEffect(()=>{
+        !user ? navigate("/login") : <Outlet/>
+    })
+
+    
+
+    return <>user ? <Outlet/> : navigate("/login")</>;
 }

@@ -38,7 +38,7 @@ export default function LoginComponent() {
         _id : result.data.Data._id,
         name : result.data.Data.name
       }
-      localStorage.setItem("user", user);
+      localStorage.setItem("user", JSON.stringify(user));
       handleSnackbar(result.data.Message, "success");
       navigate("/");
     } catch (error) {

@@ -4,9 +4,14 @@ import axios, { isAxiosError } from "axios";
   const axiosInstance = axios.create({
     baseURL: "http://localhost:8000/api/",
     headers: {
-       Authorization: `Bearer ${localStorage.getItem("user").token}`,
       "Content-Type": "application/json",
     },
+  })
+
+  axiosInstance.interceptors.request.use((config)=>{
+    const {token} = JSON.parse(localStorage.getItem("user"))
+    !token ? window.location.redirect("/login") : config.headers.Authorization = `Bearer ${token}`;
+    return config;
   })
 
   function errorHandler(error){

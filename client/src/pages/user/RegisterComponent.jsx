@@ -1,7 +1,7 @@
 import React ,{ useState } from "react";
 import NavbarComponent from "../../components/User/NavbarComponent"
 
-export function RegisterComponent() {
+export default function RegisterComponent() {
 
     const [name,setName] = useState("");
     const [email,setEmail] = useState("");
