@@ -40,6 +40,7 @@ export default function NavbarComponent(props) {
         <a href="/about">About Us</a>
         <a href="/product">Product</a>
         <a href="/login">Login</a>
+        <a href="/logout">Logout</a>
         {/* {!localStorage.getItem("name") ? (
           <>
           <a href="/login">Login</a>

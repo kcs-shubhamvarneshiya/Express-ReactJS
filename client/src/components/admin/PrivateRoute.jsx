@@ -1,16 +1,10 @@
-import React,{Outlet,useEffect} from 'react';
-import { useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
-export default function PrivateRoute() {
-    
-    const navigate = useNavigate();
-    const user= localStorage.getItem("user");
-
-    useEffect(()=>{
-        !user ? navigate("/login") : <Outlet/>
-    })
-
-    
-
-    return <>user ? <Outlet/> : navigate("/login")</>;
-}
+const ProtectedRoute = ({ component: Component, ...rest }) => ( 
+    <Route {...rest} render={(props) => (           
+      sessionStorage.getItem("token")        
+       ? <Component {...props} />
+       : <Redirect to='/login' />
+     )} />
+)  
+export default ProtectedRoute;
